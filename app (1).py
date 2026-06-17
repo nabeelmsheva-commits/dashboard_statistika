@@ -360,19 +360,26 @@ def style_fig(fig):
 # ─────────────────────────────────────────────
 # SIDEBAR (ALWAYS OPEN)
 # ─────────────────────────────────────────────
+# ─────────────────────────────────────────────
+# SIDEBAR (ALWAYS OPEN) <- INI BAGIAN KIRI
+# ─────────────────────────────────────────────
 with st.sidebar:
     st.markdown("## ⚡ CYBER FILTERS")
     st.markdown("---")
     
+    # Filter Jenis Kelamin
     gender_options = ["Semua"] + sorted(df["jenis_kelamin"].unique().tolist())
     gender_filter = st.selectbox("👤 Gender", gender_options)
 
+    # Filter Uang Saku
     uang_saku_options = ["Semua"] + ORDER_UANG_SAKU
     uang_saku_filter = st.selectbox("💵 Uang Saku", uang_saku_options)
 
+    # Filter Kehabisan Uang
     kehabisan_options = ["Semua", "Ya", "Tidak"]
     kehabisan_filter = st.selectbox("⚠️ Kehabisan Uang", kehabisan_options)
 
+    # Filter Budgeting
     budgeting_options = ["Semua", "Ya", "Tidak"]
     budgeting_filter = st.selectbox("📒 Budgeting", budgeting_options)
 

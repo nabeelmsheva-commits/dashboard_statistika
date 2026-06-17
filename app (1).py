@@ -10,7 +10,7 @@ from scipy.stats import chi2_contingency
 # KONFIGURASI HALAMAN
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="💰 Dashboard Analisis Keuangan Mahasiswa ✨",
+    page_title="Dashboard Analisis Keuangan Mahasiswa ✨",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -433,7 +433,7 @@ n = len(filtered)
 # ─────────────────────────────────────────────
 st.markdown("""
 <div style="padding: 20px 0 10px 0; text-align: center;">
-    <h1 class="cyber-title">💰 CYBER FINANCE DASHBOARD</h1>
+    <h1 class="cyber-title">💰 Dashboard Analisis Keuangan Mahasiswa </h1>
     <div style="margin-top: 15px;">
         <span class="cyber-badge">✨ GEN Z VIBES</span>
         <span class="cyber-badge">🚀 DATA SCIENCE</span>

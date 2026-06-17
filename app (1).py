@@ -568,7 +568,7 @@ with tab3:
     
     with col1:
         st.markdown('<div style="background: rgba(30, 41, 59, 0.6); padding: 20px; border-radius: 16px; border: 1px solid rgba(99, 102, 241, 0.2);">', unsafe_allow_html=True)
-        st.markdown('<p style="color: #e0e7ff; font-weight: 700; margin-bottom: 12px;'>⚠️ Pernah Kehabisan Uang?</p>')
+        st.markdown('<p style="color: #e0e7ff; font-weight: 700; margin-bottom: 12px;">⚠️ Pernah Kehabisan Uang?</p>')
         kh_cnt = filtered["kehabisan_uang"].value_counts().reset_index()
         kh_cnt.columns = ["Status", "Jumlah"]
         fig = px.pie(kh_cnt, names="Status", values="Jumlah", hole=0.5,

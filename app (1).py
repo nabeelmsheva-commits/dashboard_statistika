@@ -518,7 +518,7 @@ st.markdown("""
     .neon-text {
         background: linear-gradient(135deg, #a855f7, #06b6d4, #f472b6);
         background-size: 200% 200%;
-        animation: gradientShift 4s ease infinite;
+        animation: gradientShift 4s ease-in-out infinite;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -664,7 +664,7 @@ st.markdown("""
 def load_data():
     df = pd.read_csv("Analisis_Statistika.csv")
     df.columns = [
-        "timestamp", "jenis_kelamin", "prodi", "semester",
+        "timestamp", "jenis_kelamin", "program_studi", "semester",
         "uang_saku", "total_pengeluaran",
         "pengeluaran_makan", "pengeluaran_transport",
         "pengeluaran_hiburan", "pengeluaran_kuliah",
@@ -753,14 +753,37 @@ with st.sidebar:
     gender_options = ["Semua"] + sorted(df["jenis_kelamin"].unique().tolist())
     gender_filter = st.selectbox("👤 Jenis Kelamin", gender_options)
 
+    # Program Studi
+    prodi_options = ["Semua"] + sorted(df["program_studi"].unique().tolist())
+    prodi_filter = st.selectbox("🎓 Program Studi", prodi_options)
+
+    # Semester
+    semester_options = ["Semua"] + sorted([str(s) for s in df["semester"].unique()])
+    semester_filter = st.selectbox("📚 Semester", semester_options)
+
+    # Uang Saku
     uang_saku_options = ["Semua"] + ORDER_UANG_SAKU
     uang_saku_filter = st.selectbox("💵 Uang Saku", uang_saku_options)
 
+    # Total Pengeluaran
+    total_pengeluaran_options = ["Semua"] + ORDER_TOTAL_PENGELUARAN
+    total_pengeluaran_filter = st.selectbox("💸 Total Pengeluaran", total_pengeluaran_options)
+
+    # Pernah Kehabisan Uang
     kehabisan_options = ["Semua", "Ya", "Tidak"]
     kehabisan_filter = st.selectbox("️ Pernah Kehabisan Uang", kehabisan_options)
 
+    # Melakukan Budgeting
     budgeting_options = ["Semua", "Ya", "Tidak"]
     budgeting_filter = st.selectbox("📒 Melakukan Budgeting", budgeting_options)
+
+    # Frekuensi Belanja Online
+    belanja_options = ["Semua"] + sorted(df["frekuensi_belanja_online"].unique().tolist())
+    belanja_filter = st.selectbox("🛒 Frekuensi Belanja Online", belanja_options)
+
+    # Faktor Pengeluaran Membengkak
+    faktor_options = ["Semua"] + sorted(df["faktor_membengkak"].unique().tolist())
+    faktor_filter = st.selectbox("📈 Faktor Membengkak", faktor_options)
 
     st.markdown('<hr class="sidebar-divider">', unsafe_allow_html=True)
 
@@ -825,12 +848,22 @@ with st.sidebar:
 filtered = df.copy()
 if gender_filter != "Semua":
     filtered = filtered[filtered["jenis_kelamin"] == gender_filter]
+if prodi_filter != "Semua":
+    filtered = filtered[filtered["program_studi"] == prodi_filter]
+if semester_filter != "Semua":
+    filtered = filtered[filtered["semester"] == int(semester_filter)]
 if uang_saku_filter != "Semua":
     filtered = filtered[filtered["uang_saku"] == uang_saku_filter]
+if total_pengeluaran_filter != "Semua":
+    filtered = filtered[filtered["total_pengeluaran"] == total_pengeluaran_filter]
 if kehabisan_filter != "Semua":
     filtered = filtered[filtered["kehabisan_uang"] == kehabisan_filter]
 if budgeting_filter != "Semua":
     filtered = filtered[filtered["budgeting"] == budgeting_filter]
+if belanja_filter != "Semua":
+    filtered = filtered[filtered["frekuensi_belanja_online"] == belanja_filter]
+if faktor_filter != "Semua":
+    filtered = filtered[filtered["faktor_membengkak"] == faktor_filter]
 
 n = len(filtered)
 
@@ -1101,7 +1134,7 @@ with tab4:
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
         "pengeluaran_transport", "pengeluaran_hiburan", "pengeluaran_kuliah",
         "kehabisan_uang", "budgeting", "faktor_membengkak", "frekuensi_belanja_online",
-        "jenis_kelamin",
+        "jenis_kelamin", "program_studi", "semester"
     ])
 
     freq_df = filtered[col_select].value_counts().reset_index()
@@ -1143,13 +1176,13 @@ with tab4:
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
         "pengeluaran_transport", "pengeluaran_hiburan", "pengeluaran_kuliah",
         "kehabisan_uang", "budgeting", "faktor_membengkak",
-        "frekuensi_belanja_online", "jenis_kelamin",
+        "frekuensi_belanja_online", "jenis_kelamin", "program_studi", "semester"
     ]
     cat_labels = [
         "Uang Saku", "Total Pengeluaran", "Makan",
         "Transport", "Hiburan", "Kuliah",
         "Kehabisan", "Budgeting", "Faktor Membengkak",
-        "Belanja Online", "Gender",
+        "Belanja Online", "Gender", "Program Studi", "Semester"
     ]
 
     def cramers_v_numpy(x, y):

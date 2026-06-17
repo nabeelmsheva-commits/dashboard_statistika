@@ -1110,7 +1110,7 @@ with tab3:
     st.plotly_chart(fig4, use_container_width=True)
 
 # ══════════════════════════════════════════════
-# TAB 4 – ANALISIS LANJUTAN
+# TAB 4 – ANALISIS LANJUTAN (TANPA SCIPY)
 # ══════════════════════════════════════════════
 with tab4:
     st.markdown('<p class="section-title">Tabel Frekuensi Variabel</p>', unsafe_allow_html=True)
@@ -1154,10 +1154,8 @@ with tab4:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # Heatmap Cramér's V
+    # Heatmap Cramér's V (IMPLEMENTASI NUMPY MURNI - TANPA SCIPY)
     st.markdown('<p class="section-title">Heatmap Asosiasi Antar Variabel (Cramér\'s V) 🔥</p>', unsafe_allow_html=True)
-
-    from scipy.stats import chi2_contingency
 
     cat_cols = [
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
@@ -1172,16 +1170,32 @@ with tab4:
         "Belanja Online", "Gender",
     ]
 
-    def cramers_v(x, y):
+    # Cramér's V dengan numpy murni (pengganti scipy.stats.chi2_contingency)
+    def cramers_v_numpy(x, y):
         confusion_matrix = pd.crosstab(x, y)
-        chi2 = chi2_contingency(confusion_matrix)[0]
-        n_obs = confusion_matrix.sum().sum()
-        phi2 = chi2 / n_obs
+        n = confusion_matrix.sum().sum()
+        
+        # Hitung chi-square manual
+        chi2 = 0.0
+        row_sums = confusion_matrix.sum(axis=1)
+        col_sums = confusion_matrix.sum(axis=0)
+        
+        for i in range(confusion_matrix.shape[0]):
+            for j in range(confusion_matrix.shape[1]):
+                observed = confusion_matrix.iloc[i, j]
+                expected = (row_sums.iloc[i] * col_sums.iloc[j]) / n
+                if expected > 0:
+                    chi2 += (observed - expected)**2 / expected
+        
         r, k = confusion_matrix.shape
-        phi2corr = max(0, phi2 - ((k - 1) * (r - 1)) / (n_obs - 1))
-        rcorr = r - ((r - 1) ** 2) / (n_obs - 1)
-        kcorr = k - ((k - 1) ** 2) / (n_obs - 1)
+        phi2 = chi2 / n
+        
+        # Bias correction
+        phi2corr = max(0, phi2 - ((k - 1) * (r - 1)) / (n - 1))
+        rcorr = r - ((r - 1) ** 2) / (n - 1)
+        kcorr = k - ((k - 1) ** 2) / (n - 1)
         denom = min((kcorr - 1), (rcorr - 1))
+        
         return np.sqrt(phi2corr / denom) if denom > 0 else 0
 
     if n >= 5:
@@ -1192,7 +1206,7 @@ with tab4:
                     matrix[i][j] = 1.0
                 elif i < j:
                     try:
-                        v = cramers_v(filtered[c1], filtered[c2])
+                        v = cramers_v_numpy(filtered[c1], filtered[c2])
                     except Exception:
                         v = 0.0
                     matrix[i][j] = v

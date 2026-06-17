@@ -8,7 +8,7 @@ import time
 
 # ─────────────────────────────────────────────
 # KONFIGURASI HALAMAN
-# ─────────────────────────────────────────────
+# ────────────────────────────────────────────
 st.set_page_config(
     page_title="FinScope · Analisis Keuangan Mahasiswa",
     page_icon="✨",
@@ -17,7 +17,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# DESIGN SYSTEM & CUSTOM CSS (GEN Z EDITION + FIX KEYBOARD_DOUBLE)
+# DESIGN SYSTEM & CUSTOM CSS
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -107,7 +107,6 @@ st.markdown("""
         overflow-x: hidden;
     }
 
-    /* Animated mesh gradient background */
     .stApp::before {
         content: '';
         position: fixed;
@@ -123,7 +122,6 @@ st.markdown("""
         z-index: 0;
     }
 
-    /* Grid overlay */
     .stApp::after {
         content: '';
         position: fixed;
@@ -137,7 +135,7 @@ st.markdown("""
     }
 
     /* ═══════════════════════════════════════
-       FIX KEYBOARD_DOUBLE TOOLTIP BUG
+       FIX KEYBOARD_DOUBLE BUG
     ═══════════════════════════════════════ */
     header[data-testid="stHeader"] {
         display: none !important;
@@ -147,12 +145,7 @@ st.markdown("""
         overflow: hidden !important;
     }
 
-    .stApp > header {
-        display: none !important;
-    }
-
     [data-testid="stTooltipContent"],
-    .stTooltip,
     [class*="keyboard"],
     [class*="Keyboard"],
     .stKeyboardShortcut,
@@ -161,60 +154,64 @@ st.markdown("""
         visibility: hidden !important;
         opacity: 0 !important;
         pointer-events: none !important;
-        width: 0 !important;
-        height: 0 !important;
     }
 
     /* ═══════════════════════════════════════
-       SIDEBAR
+       SIDEBAR - SESUAI SCREENSHOT
     ═══════════════════════════════════════ */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, rgba(15,10,40,0.97) 0%, rgba(5,0,20,0.99) 100%);
-        border-right: 1px solid rgba(168,85,247,0.2);
-        backdrop-filter: blur(20px);
-    }
-
-    [data-testid="stSidebar"]::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #a855f7, #06b6d4, #f472b6, #a855f7);
-        background-size: 300% 100%;
-        animation: gradientShift 4s ease infinite;
+        background: linear-gradient(180deg, #1a1f3a 0%, #141830 50%, #0f1225 100%) !important;
+        border-right: 1px solid rgba(99,102,241,0.15);
     }
 
     [data-testid="stSidebar"] * {
-        color: #c4b5fd;
+        color: #e2e8f0;
         font-family: 'Inter', sans-serif;
     }
 
-    [data-testid="stSidebar"] .stSelectbox label,
-    [data-testid="stSidebar"] .stRadio label {
-        color: #7c3aed !important;
-        font-size: 0.7rem !important;
-        font-weight: 700 !important;
-        letter-spacing: .12em !important;
-        text-transform: uppercase !important;
+    /* Filter title besar dan bold */
+    .filter-title {
+        font-size: 1.5rem !important;
+        font-weight: 800 !important;
+        color: #f1f5f9 !important;
+        margin-bottom: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        letter-spacing: -0.02em !important;
     }
 
+    /* Label selectbox dengan emoji - besar dan bold */
+    [data-testid="stSidebar"] .stSelectbox label,
+    [data-testid="stSidebar"] .stRadio label {
+        color: #e2e8f0 !important;
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.01em !important;
+        margin-bottom: 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    /* Selectbox styling - dark mode clean */
     [data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] > div {
-        background: rgba(168,85,247,0.08) !important;
-        border: 1px solid rgba(168,85,247,0.3) !important;
+        background: #0d1117 !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
         border-radius: 12px !important;
-        color: #e9d5ff !important;
-        transition: all 0.3s ease;
+        color: #e2e8f0 !important;
+        padding: 12px 16px !important;
+        font-size: 1rem !important;
+        transition: all 0.3s ease !important;
     }
 
     [data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] > div:hover {
-        border-color: rgba(168,85,247,0.6) !important;
-        box-shadow: 0 0 20px rgba(168,85,247,0.2) !important;
+        border-color: rgba(168,85,247,0.5) !important;
+        box-shadow: 0 0 15px rgba(168,85,247,0.15) !important;
     }
 
     /* ═══════════════════════════════════════
-       METRIC CARDS (Glassmorphism + Glow)
+       METRIC CARDS
     ═══════════════════════════════════════ */
     [data-testid="metric-container"] {
         background: linear-gradient(135deg,
@@ -247,15 +244,10 @@ st.markdown("""
     [data-testid="metric-container"]:hover {
         border-color: rgba(168,85,247,0.6);
         transform: translateY(-4px) scale(1.02);
-        box-shadow:
-            0 20px 40px rgba(168,85,247,0.2),
-            0 0 30px rgba(99,102,241,0.15),
-            inset 0 0 30px rgba(168,85,247,0.05);
+        box-shadow: 0 20px 40px rgba(168,85,247,0.2), 0 0 30px rgba(99,102,241,0.15);
     }
 
-    [data-testid="metric-container"]:hover::before {
-        opacity: 1;
-    }
+    [data-testid="metric-container"]:hover::before { opacity: 1; }
 
     [data-testid="metric-container"]::after {
         content: '';
@@ -281,17 +273,13 @@ st.markdown("""
         font-size: 1.6rem !important;
         font-weight: 800 !important;
         font-family: 'Space Grotesk', sans-serif !important;
-        text-shadow: 0 0 20px rgba(168,85,247,0.3);
     }
 
-    [data-testid="stMetricDelta"] {
-        font-size: 0.75rem !important;
-        font-weight: 600 !important;
-    }
+    [data-testid="stMetricDelta"] { font-size: 0.75rem !important; font-weight: 600 !important; }
 
     /* ═══════════════════════════════════════
        TABS
-    ══════════════════════════════════════ */
+    ═══════════════════════════════════════ */
     .stTabs [data-baseweb="tab-list"] {
         background: rgba(15,10,40,0.7);
         border: 1px solid rgba(168,85,247,0.2);
@@ -310,39 +298,18 @@ st.markdown("""
         font-size: 0.85rem;
         padding: 10px 20px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
     }
 
-    .stTabs [data-baseweb="tab"]::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(34,211,238,0.05));
-        opacity: 0;
-        transition: opacity 0.3s;
-        border-radius: 12px;
-    }
-
-    .stTabs [data-baseweb="tab"]:hover {
-        color: #c4b5fd;
-    }
-
-    .stTabs [data-baseweb="tab"]:hover::before {
-        opacity: 1;
-    }
+    .stTabs [data-baseweb="tab"]:hover { color: #c4b5fd; }
 
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #7c3aed, #a855f7, #06b6d4) !important;
         color: #fff !important;
-        box-shadow:
-            0 4px 20px rgba(168,85,247,0.4),
-            0 0 40px rgba(168,85,247,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2) !important;
+        box-shadow: 0 4px 20px rgba(168,85,247,0.4), 0 0 40px rgba(168,85,247,0.15) !important;
         animation: bounceIn 0.4s ease-out;
     }
 
-    /* ══════════════════════════════════════
+    /* ═══════════════════════════════════════
        SECTION TITLES
     ═══════════════════════════════════════ */
     .section-title {
@@ -373,10 +340,7 @@ st.markdown("""
        INSIGHT & WARN CARDS
     ═══════════════════════════════════════ */
     .insight-card {
-        background: linear-gradient(135deg,
-            rgba(34,211,238,0.08) 0%,
-            rgba(168,85,247,0.05) 50%,
-            rgba(15,10,40,0.9) 100%);
+        background: linear-gradient(135deg, rgba(34,211,238,0.08) 0%, rgba(168,85,247,0.05) 50%, rgba(15,10,40,0.9) 100%);
         border: 1px solid rgba(34,211,238,0.25);
         border-radius: 18px;
         padding: 20px 24px;
@@ -397,17 +361,6 @@ st.markdown("""
         transform: translateY(-2px);
     }
 
-    .insight-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(34,211,238,0.05), transparent);
-        animation: shimmer 4s infinite;
-    }
-
     .insight-card strong { color: #67e8f9; text-shadow: 0 0 10px rgba(103,232,249,0.3); }
 
     .insight-card .badge {
@@ -424,10 +377,7 @@ st.markdown("""
     }
 
     .warn-card {
-        background: linear-gradient(135deg,
-            rgba(244,63,94,0.1) 0%,
-            rgba(168,85,247,0.05) 50%,
-            rgba(15,10,40,0.9) 100%);
+        background: linear-gradient(135deg, rgba(244,63,94,0.1) 0%, rgba(168,85,247,0.05) 50%, rgba(15,10,40,0.9) 100%);
         border: 1px solid rgba(244,63,94,0.3);
         border-radius: 18px;
         padding: 20px 24px;
@@ -436,8 +386,6 @@ st.markdown("""
         font-size: 0.88rem;
         line-height: 1.8;
         animation: slideInFromBottom 0.6s ease-out;
-        position: relative;
-        overflow: hidden;
         transition: all 0.3s ease;
     }
 
@@ -446,18 +394,7 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(244,63,94,0.1);
     }
 
-    .warn-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(244,63,94,0.05), transparent);
-        animation: shimmer 3s infinite;
-    }
-
-    /* ══════════════════════════════════════
+    /* ═══════════════════════════════════════
        DIVIDERS
     ═══════════════════════════════════════ */
     hr {
@@ -474,7 +411,6 @@ st.markdown("""
         border: 1px solid rgba(168,85,247,0.2) !important;
         border-radius: 14px !important;
         overflow: hidden !important;
-        box-shadow: 0 4px 20px rgba(168,85,247,0.05) !important;
     }
 
     .stDataFrame [data-testid="stDataFrameResizable"] {
@@ -495,43 +431,15 @@ st.markdown("""
         font-weight: 700 !important;
         padding: 12px 32px !important;
         font-size: 0.9rem !important;
-        box-shadow:
-            0 4px 25px rgba(168,85,247,0.35),
-            0 0 50px rgba(168,85,247,0.1) !important;
+        box-shadow: 0 4px 25px rgba(168,85,247,0.35) !important;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        position: relative !important;
-        overflow: hidden !important;
-    }
-
-    .stButton button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-        transition: left 0.5s;
-    }
-
-    .stButton button:hover::before {
-        left: 100%;
     }
 
     .stButton button:hover {
-        box-shadow:
-            0 8px 35px rgba(168,85,247,0.5),
-            0 0 60px rgba(168,85,247,0.2) !important;
+        box-shadow: 0 8px 35px rgba(168,85,247,0.5) !important;
         transform: translateY(-3px) scale(1.03) !important;
     }
 
-    .stButton button:active {
-        transform: translateY(0px) scale(0.98) !important;
-    }
-
-    /* ═══════════════════════════════════════
-       DOWNLOAD BUTTON
-    ═══════════════════════════════════════ */
     .stDownloadButton button {
         background: rgba(168,85,247,0.12) !important;
         color: #c4b5fd !important;
@@ -539,30 +447,21 @@ st.markdown("""
         border-radius: 12px !important;
         font-family: 'Inter', sans-serif !important;
         font-weight: 600 !important;
-        transition: all 0.3s ease !important;
     }
 
     .stDownloadButton button:hover {
         background: rgba(168,85,247,0.2) !important;
-        border-color: rgba(168,85,247,0.5) !important;
-        box-shadow: 0 0 20px rgba(168,85,247,0.2) !important;
         transform: translateY(-2px) !important;
     }
 
     /* ═══════════════════════════════════════
-       SELECTBOX & INPUTS
+       SELECTBOX MAIN CONTENT
     ═══════════════════════════════════════ */
     .stSelectbox [data-baseweb="select"] > div {
         background: rgba(15,10,40,0.8) !important;
         border: 1px solid rgba(168,85,247,0.25) !important;
         border-radius: 12px !important;
         color: #e9d5ff !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .stSelectbox [data-baseweb="select"] > div:hover {
-        border-color: rgba(168,85,247,0.5) !important;
-        box-shadow: 0 0 15px rgba(168,85,247,0.15) !important;
     }
 
     .stSelectbox label {
@@ -581,7 +480,7 @@ st.markdown("""
         border-right-color: #06b6d4 !important;
     }
 
-    /* ══════════════════════════════════════
+    /* ═══════════════════════════════════════
        EXPANDER
     ═══════════════════════════════════════ */
     .streamlit-expanderHeader {
@@ -591,26 +490,15 @@ st.markdown("""
         color: #c4b5fd !important;
         font-family: 'Inter', sans-serif !important;
         font-weight: 600 !important;
-        transition: all 0.3s ease !important;
     }
 
     .streamlit-expanderHeader:hover {
         background: rgba(15,10,40,0.9) !important;
         border-color: rgba(168,85,247,0.4) !important;
-        box-shadow: 0 4px 15px rgba(168,85,247,0.1) !important;
     }
 
-    /* ═══════════════════════════════════════
-       CAPTION
-    ═══════════════════════════════════════ */
-    .stCaption {
-        color: #4b5563 !important;
-        font-size: 0.75rem !important;
-    }
+    .stCaption { color: #4b5563 !important; font-size: 0.75rem !important; }
 
-    /* ═══════════════════════════════════════
-       INFO / WARNING BOXES
-    ═══════════════════════════════════════ */
     .stInfo {
         background: rgba(34,211,238,0.07) !important;
         border: 1px solid rgba(34,211,238,0.2) !important;
@@ -624,7 +512,7 @@ st.markdown("""
         border-radius: 14px !important;
     }
 
-    /* ══════════════════════════════════════
+    /* ═══════════════════════════════════════
        CUSTOM COMPONENTS
     ═══════════════════════════════════════ */
     .neon-text {
@@ -636,34 +524,8 @@ st.markdown("""
         background-clip: text;
     }
 
-    .glass-card {
-        background: rgba(15,10,40,0.6);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(168,85,247,0.2);
-        border-radius: 18px;
-        padding: 24px;
-        transition: all 0.4s ease;
-    }
-
-    .glass-card:hover {
-        border-color: rgba(168,85,247,0.4);
-        box-shadow: 0 20px 40px rgba(168,85,247,0.15);
-        transform: translateY(-2px);
-    }
-
-    .emoji-float {
-        display: inline-block;
-        animation: floatUp 3s ease-in-out infinite;
-    }
-
-    .emoji-wave {
-        display: inline-block;
-        animation: waveHand 2s ease-in-out infinite;
-    }
-
-    .glow-border {
-        animation: borderGlow 4s ease infinite;
-    }
+    .emoji-float { display: inline-block; animation: floatUp 3s ease-in-out infinite; }
+    .emoji-wave { display: inline-block; animation: waveHand 2s ease-in-out infinite; }
 
     .pulse-dot {
         width: 8px;
@@ -674,49 +536,26 @@ st.markdown("""
         display: inline-block;
     }
 
-    /* Progress bar styling */
     .stProgress > div > div {
         background: linear-gradient(90deg, #7c3aed, #a855f7, #06b6d4) !important;
         background-size: 200% 100% !important;
         animation: gradientShift 2s ease infinite !important;
     }
 
-    /* Remove default padding */
-    .block-container {
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-    }
+    .block-container { padding-top: 2rem !important; padding-bottom: 2rem !important; }
 
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-        background: rgba(15,10,40,0.5);
-        border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #7c3aed, #a855f7);
-        border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #a855f7, #06b6d4);
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15,10,40,0.5); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #7c3aed, #a855f7); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #a855f7, #06b6d4); }
 
-    /* Tab content animation */
-    .stTabs [data-baseweb="tab-panel"] {
-        animation: scaleIn 0.4s ease-out;
-    }
+    .stTabs [data-baseweb="tab-panel"] { animation: scaleIn 0.4s ease-out; }
 
     /* ═══════════════════════════════════════
-       PROFILE CARD STYLES
+       PROFILE CARD
     ═══════════════════════════════════════ */
     .profile-card {
-        background: linear-gradient(135deg,
-            rgba(168,85,247,0.15) 0%,
-            rgba(6,182,212,0.1) 50%,
-            rgba(15,10,40,0.95) 100%);
+        background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(6,182,212,0.1) 50%, rgba(15,10,40,0.95) 100%);
         border: 2px solid rgba(168,85,247,0.3);
         border-radius: 20px;
         padding: 28px;
@@ -731,9 +570,7 @@ st.markdown("""
     .profile-card::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
+        top: 0; left: 0; right: 0;
         height: 4px;
         background: linear-gradient(90deg, #a855f7, #06b6d4, #f472b6, #a855f7);
         background-size: 300% 100%;
@@ -772,19 +609,8 @@ st.markdown("""
         margin-bottom: 12px;
     }
 
-    .profile-program {
-        font-size: 0.8rem;
-        color: #c4b5fd;
-        text-align: center;
-        margin-bottom: 16px;
-    }
-
-    .profile-university {
-        font-size: 0.75rem;
-        color: #9ca3af;
-        text-align: center;
-        font-style: italic;
-    }
+    .profile-program { font-size: 0.8rem; color: #c4b5fd; text-align: center; margin-bottom: 16px; }
+    .profile-university { font-size: 0.75rem; color: #9ca3af; text-align: center; font-style: italic; }
 
     .profile-stats {
         display: flex;
@@ -794,30 +620,11 @@ st.markdown("""
         border-top: 1px solid rgba(168,85,247,0.2);
     }
 
-    .profile-stat-item {
-        text-align: center;
-    }
+    .profile-stat-item { text-align: center; }
+    .profile-stat-value { font-size: 1.2rem; font-weight: 700; color: #a855f7; display: block; }
+    .profile-stat-label { font-size: 0.7rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
 
-    .profile-stat-value {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #a855f7;
-        display: block;
-    }
-
-    .profile-stat-label {
-        font-size: 0.7rem;
-        color: #6b7280;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 16px;
-    }
+    .social-links { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
 
     .social-icon {
         width: 36px;
@@ -839,10 +646,18 @@ st.markdown("""
         box-shadow: 0 5px 15px rgba(168,85,247,0.3);
     }
 
+    /* Sidebar divider */
+    .sidebar-divider {
+        border: none !important;
+        height: 1px !important;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent) !important;
+        margin: 24px 0 !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# ────────────────────────────────────────────
 # LOAD DATA
 # ─────────────────────────────────────────────
 @st.cache_data
@@ -915,43 +730,43 @@ def style_fig(fig, height=380):
     return fig
 
 # ─────────────────────────────────────────────
-# SIDEBAR – FILTER & PROFIL
+# SIDEBAR – FILTER & PROFIL (SESUAI SCREENSHOT)
 # ─────────────────────────────────────────────
 with st.sidebar:
-    # Logo & Branding
+    # ═══════════════════════════════════════
+    # FILTER TITLE (BESAR & BOLD)
+    # ═══════════════════════════════════════
     st.markdown("""
-    <div style="padding: 12px 0 24px 0; text-align:center;">
-        <div style="font-size:2rem; animation: floatUp 3s ease-in-out infinite;">✨</div>
-        <div class="neon-text" style="font-size:1.4rem; font-weight:900; letter-spacing:-.03em; margin-top:8px;">
-            FinScope
-        </div>
-        <div style="font-size:0.68rem; color:#6b7280; margin-top:4px; text-transform:uppercase; letter-spacing:.2em; font-weight:600;">
-            Financial Analytics
-        </div>
-        <div style="margin-top:10px;">
-            <span class="pulse-dot"></span>
-            <span style="font-size:0.7rem; color:#6b7280; margin-left:6px;">Live Data</span>
+    <div style="padding: 20px 0 10px 0;">
+        <div class="filter-title">
+            <span style="font-size:1.6rem;">🎛️</span>
+            <span>Filter Data</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.15em;margin-bottom:14px;display:flex;align-items:center;gap:6px;">🎛️ Filter Data</div>', unsafe_allow_html=True)
+    st.markdown('<hr class="sidebar-divider">', unsafe_allow_html=True)
 
+    # ═══════════════════════════════════════
+    # FILTER SELECTBOXES DENGAN EMOJI
+    # ═══════════════════════════════════════
     gender_options = ["Semua"] + sorted(df["jenis_kelamin"].unique().tolist())
-    gender_filter = st.selectbox("Jenis Kelamin", gender_options)
+    gender_filter = st.selectbox("👤 Jenis Kelamin", gender_options)
 
     uang_saku_options = ["Semua"] + ORDER_UANG_SAKU
-    uang_saku_filter = st.selectbox("Uang Saku", uang_saku_options)
+    uang_saku_filter = st.selectbox("💵 Uang Saku", uang_saku_options)
 
     kehabisan_options = ["Semua", "Ya", "Tidak"]
-    kehabisan_filter = st.selectbox("Pernah Kehabisan Uang", kehabisan_options)
+    kehabisan_filter = st.selectbox("️ Pernah Kehabisan Uang", kehabisan_options)
 
     budgeting_options = ["Semua", "Ya", "Tidak"]
-    budgeting_filter = st.selectbox("Melakukan Budgeting", budgeting_options)
+    budgeting_filter = st.selectbox("📒 Melakukan Budgeting", budgeting_options)
 
-    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown('<hr class="sidebar-divider">', unsafe_allow_html=True)
 
-    # Dataset Info
+    # ═══════════════════════════════════════
+    # DATASET INFO
+    # ═══════════════════════════════════════
     st.markdown(f"""
     <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:14px;padding:16px;animation:borderGlow 5s ease infinite;">
         <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;">📊 Dataset Info</div>
@@ -966,12 +781,12 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    # ══════════════════════════════════════
-    # PROFIL SECTION (BAGIAN KIRI)
+    # ═══════════════════════════════════════
+    # PROFIL SECTION
     # ═══════════════════════════════════════
     st.markdown("""
     <div class="profile-card" style="margin-top:24px;">
-        <div class="profile-avatar">👨‍💻</div>
+        <div class="profile-avatar">‍💻</div>
         <div class="profile-name">Muhammad Sheva Nabeel</div>
         <div class="profile-nim">NIM: 60125001</div>
         <div class="profile-program">📚 Sains Data</div>
@@ -999,7 +814,7 @@ with st.sidebar:
         </div>
         
         <div style="margin-top:16px;text-align:center;font-size:0.65rem;color:#6b7280;">
-            <span class="emoji-float">🚀</span> Built with Streamlit + Plotly
+            <span class="emoji-float"></span> Built with Streamlit + Plotly
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1050,17 +865,17 @@ pct_belanja_sering = round(filtered[filtered["frekuensi_belanja_online"] == "3 k
 modus_pengeluaran = filtered["total_pengeluaran"].mode()[0] if n else "-"
 
 k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric(" Responden",         f"{n} orang")
-k2.metric("⚠️ Kehabisan Uang",    f"{pct_kehabisan}%",
+k1.metric("👥 Responden",         f"{n} orang")
+k2.metric("️ Kehabisan Uang",    f"{pct_kehabisan}%",
           delta="Risiko sistemik" if pct_kehabisan > 35 else "Terkendali",
           delta_color="inverse" if pct_kehabisan > 35 else "normal")
 k3.metric("📒 Pakai Budgeting",   f"{pct_budgeting}%")
-k4.metric(" Belanja Online ≥3x", f"{pct_belanja_sering}%")
+k4.metric("🛒 Belanja Online ≥3x", f"{pct_belanja_sering}%")
 k5.metric("💸 Pengeluaran Utama", modus_pengeluaran.replace("Rp ", "Rp\u00A0"))
 
 st.markdown("<div style='margin-top:12px;'></div>", unsafe_allow_html=True)
 
-# ────────────────────────────────────────────
+# ─────────────────────────────────────────────
 # TAB NAVIGASI
 # ─────────────────────────────────────────────
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -1068,10 +883,10 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "💳 Pengeluaran",
     "🔍 Perilaku",
     "📈 Advanced",
-    " Monte Carlo",
+    "🎲 Monte Carlo",
 ])
 
-# ══════════════════════════════════════════════
+# ═════════════════════════════════════════════
 # TAB 1 – DEMOGRAFI & DISTRIBUSI
 # ══════════════════════════════════════════════
 with tab1:
@@ -1128,7 +943,7 @@ with tab1:
 
 # ══════════════════════════════════════════════
 # TAB 2 – POLA PENGELUARAN
-# ══════════════════════════════════════════════
+# ═════════════════════════════════════════════
 with tab2:
     col1, col2 = st.columns(2)
 
@@ -1278,7 +1093,7 @@ with tab3:
     st.plotly_chart(fig4, use_container_width=True)
 
 # ══════════════════════════════════════════════
-# TAB 4 – ANALISIS LANJUTAN (TANPA SCIPY)
+# TAB 4 – ANALISIS LANJUTAN
 # ══════════════════════════════════════════════
 with tab4:
     st.markdown('<p class="section-title">Tabel Frekuensi Variabel</p>', unsafe_allow_html=True)
@@ -1309,11 +1124,11 @@ with tab4:
     with col_t:
         st.markdown(f"""
         <div style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:14px;padding:18px;margin-bottom:14px;animation:borderGlow 5s ease infinite;">
-            <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;"> Modus</div>
+            <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;">🏆 Modus</div>
             <div style="color:#c4b5fd;font-weight:800;font-size:0.92rem;margin-top:6px;font-family:'JetBrains Mono',monospace;">{modus_val}</div>
         </div>
         <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:14px;padding:18px;animation:borderGlow 6s ease infinite;">
-            <div style="font-size:0.65rem;color:#06b6d4;font-weight:700;text-transform:uppercase;letter-spacing:.12em;">📊 N Filtered</div>
+            <div style="font-size:0.65rem;color:#06b6d4;font-weight:700;text-transform:uppercase;letter-spacing:.12em;"> N Filtered</div>
             <div style="color:#67e8f9;font-weight:800;font-size:1.15rem;margin-top:6px;font-family:'JetBrains Mono',monospace;">{n}</div>
         </div>
         """, unsafe_allow_html=True)
@@ -1322,7 +1137,7 @@ with tab4:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    st.markdown('<p class="section-title">Heatmap Asosiasi Antar Variabel (Cramér\'s V) </p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Heatmap Asosiasi Antar Variabel (Cramér\'s V) 🔥</p>', unsafe_allow_html=True)
 
     cat_cols = [
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
@@ -1411,7 +1226,7 @@ with tab4:
     with st.expander("📂 Tampilkan Tabel Data"):
         st.dataframe(filtered.reset_index(drop=True), use_container_width=True)
         csv = filtered.to_csv(index=False).encode("utf-8")
-        st.download_button("⬇️ Download CSV", data=csv,
+        st.download_button("️ Download CSV", data=csv,
                            file_name="data_filtered.csv", mime="text/csv")
 
 # ══════════════════════════════════════════════
@@ -1485,7 +1300,7 @@ with tab5:
             delta_khabis     = prob_khabis - overall_khabis
 
         kpi1, kpi2, kpi3 = st.columns(3)
-        kpi1.metric("📉 Probabilitas Kehabisan",
+        kpi1.metric(" Probabilitas Kehabisan",
                     f"{prob_khabis:.1f}%",
                     delta=f"{delta_khabis:+.1f}% vs rata-rata",
                     delta_color="inverse" if prob_khabis > overall_khabis else "normal")

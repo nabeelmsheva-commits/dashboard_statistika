@@ -17,8 +17,8 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# DESIGN SYSTEM & CUSTOM CSS (GEN Z EDITION)
-# ─────────────────────────────────────────────
+# DESIGN SYSTEM & CUSTOM CSS (GEN Z EDITION + FIX)
+# ────────────────────────────────────────────
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -70,11 +70,6 @@ st.markdown("""
         100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes neonFlicker {
-        0%, 100% { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #a855f7; }
-        50% { text-shadow: 0 0 5px #a855f7, 0 0 15px #a855f7, 0 0 30px #a855f7; }
-    }
-
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
@@ -85,15 +80,6 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes rainbowBorder {
-        0% { border-color: #ff0080; }
-        20% { border-color: #ff8c00; }
-        40% { border-color: #ffd700; }
-        60% { border-color: #00ff88; }
-        80% { border-color: #00bfff; }
-        100% { border-color: #ff0080; }
-    }
-
     @keyframes bounceIn {
         0% { transform: scale(0.3); opacity: 0; }
         50% { transform: scale(1.05); }
@@ -101,15 +87,15 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes rotate3d {
-        0% { transform: perspective(1000px) rotateY(0deg); }
-        100% { transform: perspective(1000px) rotateY(360deg); }
-    }
-
     @keyframes waveHand {
         0%, 100% { transform: rotate(0deg); }
         25% { transform: rotate(20deg); }
         75% { transform: rotate(-15deg); }
+    }
+
+    @keyframes glowPulse {
+        0%, 100% { box-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 15px #a855f7; }
+        50% { box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 30px #a855f7; }
     }
 
     /* ═══════════════════════════════════════
@@ -151,8 +137,45 @@ st.markdown("""
     }
 
     /* ═══════════════════════════════════════
-       SIDEBAR
+       FIX KEYBOARD_DOUBLE TOOLTIP BUG
+       (AGRESIF - MENYEMBUNYIKAN SEMUA TOOLTIP KEYBOARD)
     ═══════════════════════════════════════ */
+    header[data-testid="stHeader"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .stApp > header {
+        display: none !important;
+    }
+
+    [data-testid="stTooltipContent"],
+    .stTooltip,
+    [class*="keyboard"],
+    [class*="Keyboard"],
+    .stKeyboardShortcut,
+    .stTooltipHoverTarget {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    /* Sembunyikan semua span yang mengandung teks keyboard */
+    span[title*="keyboard"],
+    span[data-testid*="keyboard"],
+    div[title*="keyboard"] {
+        display: none !important;
+    }
+
+    /* ═══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, rgba(15,10,40,0.97) 0%, rgba(5,0,20,0.99) 100%);
         border-right: 1px solid rgba(168,85,247,0.2);
@@ -200,7 +223,7 @@ st.markdown("""
 
     /* ═══════════════════════════════════════
        METRIC CARDS (Glassmorphism + Glow)
-    ═══════════════════════════════════════ */
+    ══════════════════════════════════════ */
     [data-testid="metric-container"] {
         background: linear-gradient(135deg,
             rgba(99,102,241,0.15) 0%,
@@ -442,7 +465,7 @@ st.markdown("""
         animation: shimmer 3s infinite;
     }
 
-    /* ═══════════════════════════════════════
+    /* ══════════════════════════════════════
        DIVIDERS
     ═══════════════════════════════════════ */
     hr {
@@ -566,7 +589,7 @@ st.markdown("""
         border-right-color: #06b6d4 !important;
     }
 
-    /* ═══════════════════════════════════════
+    /* ══════════════════════════════════════
        EXPANDER
     ═══════════════════════════════════════ */
     .streamlit-expanderHeader {
@@ -609,7 +632,7 @@ st.markdown("""
         border-radius: 14px !important;
     }
 
-    /* ═══════════════════════════════════════
+    /* ══════════════════════════════════════
        CUSTOM COMPONENTS
     ═══════════════════════════════════════ */
     .neon-text {
@@ -692,6 +715,136 @@ st.markdown("""
     /* Tab content animation */
     .stTabs [data-baseweb="tab-panel"] {
         animation: scaleIn 0.4s ease-out;
+    }
+
+    /* ═══════════════════════════════════════
+       PROFILE CARD STYLES
+    ═══════════════════════════════════════ */
+    .profile-card {
+        background: linear-gradient(135deg,
+            rgba(168,85,247,0.15) 0%,
+            rgba(6,182,212,0.1) 50%,
+            rgba(15,10,40,0.95) 100%);
+        border: 2px solid rgba(168,85,247,0.3);
+        border-radius: 20px;
+        padding: 28px;
+        margin: 20px 0;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        animation: slideInFromBottom 0.8s ease-out, borderGlow 5s ease infinite;
+        box-shadow: 0 10px 40px rgba(168,85,247,0.2);
+    }
+
+    .profile-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #a855f7, #06b6d4, #f472b6, #a855f7);
+        background-size: 300% 100%;
+        animation: gradientShift 3s ease infinite;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7c3aed, #a855f7, #06b6d4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        margin: 0 auto 16px auto;
+        animation: floatUp 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+        box-shadow: 0 8px 30px rgba(168,85,247,0.4);
+    }
+
+    .profile-name {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #e9d5ff;
+        text-align: center;
+        margin-bottom: 8px;
+        text-shadow: 0 0 20px rgba(168,85,247,0.4);
+    }
+
+    .profile-nim {
+        font-size: 0.85rem;
+        color: #67e8f9;
+        text-align: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .profile-program {
+        font-size: 0.8rem;
+        color: #c4b5fd;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+
+    .profile-university {
+        font-size: 0.75rem;
+        color: #9ca3af;
+        text-align: center;
+        font-style: italic;
+    }
+
+    .profile-stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(168,85,247,0.2);
+    }
+
+    .profile-stat-item {
+        text-align: center;
+    }
+
+    .profile-stat-value {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #a855f7;
+        display: block;
+    }
+
+    .profile-stat-label {
+        font-size: 0.7rem;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(168,85,247,0.1);
+        border: 1px solid rgba(168,85,247,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .social-icon:hover {
+        background: rgba(168,85,247,0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(168,85,247,0.3);
     }
 
 </style>
@@ -818,12 +971,37 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
+    # PROFILE SECTION IN SIDEBAR
     st.markdown("""
-    <div style="margin-top:24px;padding:14px;border-radius:14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);animation:borderGlow 6s ease infinite;">
-        <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;">💜 Dibuat oleh</div>
-        <div style="color:#e9d5ff;font-size:0.85rem;font-weight:700;">Muhammad Sheva Nabeel</div>
-        <div style="color:#6b7280;font-size:0.72rem;margin-top:3px;">Sains Data · 60125001</div>
-        <div style="margin-top:8px;font-size:0.65rem;color:#7c3aed;">
+    <div class="profile-card" style="margin-top:24px;">
+        <div class="profile-avatar">👨‍💻</div>
+        <div class="profile-name">Muhammad Sheva Nabeel</div>
+        <div class="profile-nim">NIM: 60125001</div>
+        <div class="profile-program">📚 Sains Data</div>
+        <div class="profile-university">🎓 UIN KH Abdurrahman Wahid</div>
+        
+        <div class="profile-stats">
+            <div class="profile-stat-item">
+                <span class="profile-stat-value">5</span>
+                <span class="profile-stat-label">Tabs</span>
+            </div>
+            <div class="profile-stat-item">
+                <span class="profile-stat-value">10K</span>
+                <span class="profile-stat-label">Simulasi</span>
+            </div>
+            <div class="profile-stat-item">
+                <span class="profile-stat-value">100%</span>
+                <span class="profile-stat-label">Python</span>
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <div class="social-icon">📧</div>
+            <div class="social-icon">💼</div>
+            <div class="social-icon"></div>
+        </div>
+        
+        <div style="margin-top:16px;text-align:center;font-size:0.65rem;color:#6b7280;">
             <span class="emoji-float">🚀</span> Built with Streamlit + Plotly
         </div>
     </div>
@@ -876,7 +1054,7 @@ modus_pengeluaran = filtered["total_pengeluaran"].mode()[0] if n else "-"
 
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("👥 Responden",         f"{n} orang")
-k2.metric("⚠️ Kehabisan Uang",    f"{pct_kehabisan}%",
+k2.metric("️ Kehabisan Uang",    f"{pct_kehabisan}%",
           delta="Risiko sistemik" if pct_kehabisan > 35 else "Terkendali",
           delta_color="inverse" if pct_kehabisan > 35 else "normal")
 k3.metric("📒 Pakai Budgeting",   f"{pct_budgeting}%")
@@ -942,17 +1120,16 @@ with tab1:
     style_fig(fig3, height=340)
     st.plotly_chart(fig3, use_container_width=True)
 
-    # Insight
     st.markdown(f"""
     <div class="insight-card">
         💡 <strong>Insight Demografi:</strong> Mayoritas responden <span class="badge">{round(filtered[filtered['uang_saku']=='Rp 500.000 - Rp 1.000.000'].shape[0]/n*100,1) if n else 0}%</span>
         berada di rentang uang saku Rp 500rb–Rp 1jt per bulan.
         <br>Perempuan mendominasi sampel dengan proporsi lebih tinggi.
-        <br><span class="emoji-float">📊</span> Data ini menunjukkan representasi yang cukup baik untuk analisis finansial mahasiswa.
+        <br><span class="emoji-float"></span> Data ini menunjukkan representasi yang cukup baik untuk analisis finansial mahasiswa.
     </div>
     """, unsafe_allow_html=True)
 
-# ══════════════════════════════════════════════
+# ═════════════════════════════════════════════
 # TAB 2 – POLA PENGELUARAN
 # ══════════════════════════════════════════════
 with tab2:
@@ -984,14 +1161,12 @@ with tab2:
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
 
-    # Radar chart kategori pengeluaran
     st.markdown('<p class="section-title">Profil Pengeluaran per Kategori</p>', unsafe_allow_html=True)
     col_makan     = filtered["pengeluaran_makan"].value_counts()
     col_transport = filtered["pengeluaran_transport"].value_counts()
     col_hiburan   = filtered["pengeluaran_hiburan"].value_counts()
     col_kuliah    = filtered["pengeluaran_kuliah"].value_counts()
 
-    all_cats = sorted(set(col_makan.index) | set(col_transport.index) | set(col_hiburan.index) | set(col_kuliah.index))
     breakdown_df = pd.DataFrame({
         "Makan": col_makan, "Transport": col_transport,
         "Hiburan": col_hiburan, "Kuliah": col_kuliah,
@@ -1007,7 +1182,6 @@ with tab2:
     style_fig(fig3, height=360)
     st.plotly_chart(fig3, use_container_width=True)
 
-    # Frekuensi belanja online
     st.markdown('<p class="section-title">Frekuensi Belanja Online</p>', unsafe_allow_html=True)
     belanja_cnt = filtered["frekuensi_belanja_online"].value_counts().reset_index()
     belanja_cnt.columns = ["Frekuensi", "Jumlah"]
@@ -1054,7 +1228,6 @@ with tab3:
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
 
-    # Stacked bar: Budgeting vs Kehabisan
     st.markdown('<p class="section-title">Efek Budgeting terhadap Risiko Kehabisan Uang</p>', unsafe_allow_html=True)
     cross_bk = pd.crosstab(filtered["budgeting"], filtered["kehabisan_uang"])
     cross_bk_pct = (cross_bk.div(cross_bk.sum(axis=1), axis=0) * 100).round(1)
@@ -1075,7 +1248,6 @@ with tab3:
     style_fig(fig3, height=320)
     st.plotly_chart(fig3, use_container_width=True)
 
-    # Highlight
     no_budget_risk = cross_bk_pct.get("Ya", pd.Series()).get("Tidak", 0)
     yes_budget_risk = cross_bk_pct.get("Ya", pd.Series()).get("Ya", 0)
     delta = round(no_budget_risk - yes_budget_risk, 1)
@@ -1089,7 +1261,6 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    # Kehabisan uang per uang saku
     st.markdown('<p class="section-title">Risiko Kehabisan per Kelompok Uang Saku</p>', unsafe_allow_html=True)
     cross_us = pd.crosstab(filtered["uang_saku"], filtered["kehabisan_uang"]).reindex(ORDER_UANG_SAKU, fill_value=0)
     cross_us_pct = (cross_us.div(cross_us.sum(axis=1), axis=0) * 100).round(1)
@@ -1154,7 +1325,6 @@ with tab4:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # Heatmap Cramér's V (IMPLEMENTASI NUMPY MURNI - TANPA SCIPY)
     st.markdown('<p class="section-title">Heatmap Asosiasi Antar Variabel (Cramér\'s V) 🔥</p>', unsafe_allow_html=True)
 
     cat_cols = [
@@ -1170,12 +1340,10 @@ with tab4:
         "Belanja Online", "Gender",
     ]
 
-    # Cramér's V dengan numpy murni (pengganti scipy.stats.chi2_contingency)
     def cramers_v_numpy(x, y):
         confusion_matrix = pd.crosstab(x, y)
-        n = confusion_matrix.sum().sum()
+        n_obs = confusion_matrix.sum().sum()
         
-        # Hitung chi-square manual
         chi2 = 0.0
         row_sums = confusion_matrix.sum(axis=1)
         col_sums = confusion_matrix.sum(axis=0)
@@ -1183,17 +1351,16 @@ with tab4:
         for i in range(confusion_matrix.shape[0]):
             for j in range(confusion_matrix.shape[1]):
                 observed = confusion_matrix.iloc[i, j]
-                expected = (row_sums.iloc[i] * col_sums.iloc[j]) / n
+                expected = (row_sums.iloc[i] * col_sums.iloc[j]) / n_obs
                 if expected > 0:
                     chi2 += (observed - expected)**2 / expected
         
         r, k = confusion_matrix.shape
-        phi2 = chi2 / n
+        phi2 = chi2 / n_obs
         
-        # Bias correction
-        phi2corr = max(0, phi2 - ((k - 1) * (r - 1)) / (n - 1))
-        rcorr = r - ((r - 1) ** 2) / (n - 1)
-        kcorr = k - ((k - 1) ** 2) / (n - 1)
+        phi2corr = max(0, phi2 - ((k - 1) * (r - 1)) / (n_obs - 1))
+        rcorr = r - ((r - 1) ** 2) / (n_obs - 1)
+        kcorr = k - ((k - 1) ** 2) / (n_obs - 1)
         denom = min((kcorr - 1), (rcorr - 1))
         
         return np.sqrt(phi2corr / denom) if denom > 0 else 0
@@ -1212,7 +1379,6 @@ with tab4:
                     matrix[i][j] = v
                     matrix[j][i] = v
 
-        # Custom purple-to-cyan colorscale
         purple_cyan = [
             [0.0,  "#030014"],
             [0.2,  "#1e1b4b"],
@@ -1248,7 +1414,7 @@ with tab4:
     with st.expander("📂 Tampilkan Tabel Data"):
         st.dataframe(filtered.reset_index(drop=True), use_container_width=True)
         csv = filtered.to_csv(index=False).encode("utf-8")
-        st.download_button("⬇️ Download CSV", data=csv,
+        st.download_button("️ Download CSV", data=csv,
                            file_name="data_filtered.csv", mime="text/csv")
 
 # ══════════════════════════════════════════════
@@ -1280,8 +1446,8 @@ with tab5:
     run_btn = st.button("🚀 Jalankan Simulasi", use_container_width=True)
 
     if run_btn:
-        with st.spinner("⚡ Menjalankan 10.000 iterasi..."):
-            time.sleep(0.5)  # sedikit delay biar animasi spinner keliatan
+        with st.spinner(" Menjalankan 10.000 iterasi..."):
+            time.sleep(0.5)
             n_sim = 10000
 
             ref_data = filtered[(filtered["uang_saku"] == sim_uang_saku) & (filtered["budgeting"] == sim_budgeting)]
@@ -1321,7 +1487,6 @@ with tab5:
             overall_khabis   = np.mean(filtered["kehabisan_uang"] == "Ya") * 100
             delta_khabis     = prob_khabis - overall_khabis
 
-        # KPI
         kpi1, kpi2, kpi3 = st.columns(3)
         kpi1.metric("📉 Probabilitas Kehabisan",
                     f"{prob_khabis:.1f}%",
@@ -1347,7 +1512,6 @@ with tab5:
         style_fig(fig_sim, height=400)
         st.plotly_chart(fig_sim, use_container_width=True)
 
-        # Interpretasi
         risk_color = "warn-card" if risk_sisa_negatif > 30 else "insight-card"
         st.markdown(f"""
         <div class="{risk_color}">
@@ -1356,7 +1520,7 @@ with tab5:
             • Rata-rata sisa uang akhir bulan: <strong>Rp {mean_sisa:,.0f}</strong><br>
             • Risiko defisit (pengeluaran > uang saku): <strong>{risk_sisa_negatif:.1f}%</strong><br>
             • 90% confidence interval sisa uang: <strong>Rp {p5_sisa:,.0f} – Rp {p95_sisa:,.0f}</strong><br>
-            • <span class="emoji-float">🔴</span> Area merah di kiri garis putus = skenario kehabisan uang sebelum akhir bulan.
+            • <span class="emoji-float"></span> Area merah di kiri garis putus = skenario kehabisan uang sebelum akhir bulan.
             <br><br><span class="badge">💡 Pro Tip</span> Tingkatkan budgeting dan kurangi pengeluaran impulsif untuk menurunkan risiko defisit!
         </div>
         """, unsafe_allow_html=True)

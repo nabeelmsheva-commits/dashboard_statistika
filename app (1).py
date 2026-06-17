@@ -85,6 +85,15 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
+    @keyframes rainbowBorder {
+        0% { border-color: #ff0080; }
+        20% { border-color: #ff8c00; }
+        40% { border-color: #ffd700; }
+        60% { border-color: #00ff88; }
+        80% { border-color: #00bfff; }
+        100% { border-color: #ff0080; }
+    }
+
     @keyframes bounceIn {
         0% { transform: scale(0.3); opacity: 0; }
         50% { transform: scale(1.05); }
@@ -92,15 +101,15 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
+    @keyframes rotate3d {
+        0% { transform: perspective(1000px) rotateY(0deg); }
+        100% { transform: perspective(1000px) rotateY(360deg); }
+    }
+
     @keyframes waveHand {
         0%, 100% { transform: rotate(0deg); }
         25% { transform: rotate(20deg); }
         75% { transform: rotate(-15deg); }
-    }
-
-    @keyframes glowPulse {
-        0%, 100% { box-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 15px #a855f7; }
-        50% { box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 30px #a855f7; }
     }
 
     /* ═══════════════════════════════════════
@@ -685,154 +694,6 @@ st.markdown("""
         animation: scaleIn 0.4s ease-out;
     }
 
-    /* ═══════════════════════════════════════
-       FIX FOR KEYBOARD DOUBK ISSUE
-    ═══════════════════════════════════════ */
-    [class*="keyboard"],
-    .keyboard_doubk,
-    .keyboard_double,
-    .stKeyboard,
-    .stKeyboardHover,
-    .stKeyboardFocus,
-    [data-testid*="keyboard"],
-    .icon-keyboard {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-    }
-
-    /* ═══════════════════════════════════════
-       PROFILE CARD STYLES
-    ═══════════════════════════════════════ */
-    .profile-card {
-        background: linear-gradient(135deg,
-            rgba(168,85,247,0.15) 0%,
-            rgba(6,182,212,0.1) 50%,
-            rgba(15,10,40,0.95) 100%);
-        border: 2px solid rgba(168,85,247,0.3);
-        border-radius: 20px;
-        padding: 28px;
-        margin: 20px 0;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(12px);
-        animation: slideInFromBottom 0.8s ease-out, borderGlow 5s ease infinite;
-        box-shadow: 0 10px 40px rgba(168,85,247,0.2);
-    }
-
-    .profile-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #a855f7, #06b6d4, #f472b6, #a855f7);
-        background-size: 300% 100%;
-        animation: gradientShift 3s ease infinite;
-    }
-
-    .profile-avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #7c3aed, #a855f7, #06b6d4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        margin: 0 auto 16px auto;
-        animation: floatUp 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
-        box-shadow: 0 8px 30px rgba(168,85,247,0.4);
-    }
-
-    .profile-name {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: #e9d5ff;
-        text-align: center;
-        margin-bottom: 8px;
-        text-shadow: 0 0 20px rgba(168,85,247,0.4);
-    }
-
-    .profile-nim {
-        font-size: 0.85rem;
-        color: #67e8f9;
-        text-align: center;
-        font-family: 'JetBrains Mono', monospace;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    .profile-program {
-        font-size: 0.8rem;
-        color: #c4b5fd;
-        text-align: center;
-        margin-bottom: 16px;
-    }
-
-    .profile-university {
-        font-size: 0.75rem;
-        color: #9ca3af;
-        text-align: center;
-        font-style: italic;
-    }
-
-    .profile-stats {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(168,85,247,0.2);
-    }
-
-    .profile-stat-item {
-        text-align: center;
-    }
-
-    .profile-stat-value {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #a855f7;
-        display: block;
-    }
-
-    .profile-stat-label {
-        font-size: 0.7rem;
-        color: #6b7280;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 16px;
-    }
-
-    .social-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: rgba(168,85,247,0.1);
-        border: 1px solid rgba(168,85,247,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .social-icon:hover {
-        background: rgba(168,85,247,0.3);
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(168,85,247,0.3);
-    }
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -957,37 +818,12 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    # PROFILE SECTION IN SIDEBAR
     st.markdown("""
-    <div class="profile-card" style="margin-top:24px;">
-        <div class="profile-avatar">👨‍💻</div>
-        <div class="profile-name">Muhammad Sheva Nabeel</div>
-        <div class="profile-nim">NIM: 60125001</div>
-        <div class="profile-program">📚 Sains Data</div>
-        <div class="profile-university">🎓 UIN KH Abdurrahman Wahid</div>
-        
-        <div class="profile-stats">
-            <div class="profile-stat-item">
-                <span class="profile-stat-value">5</span>
-                <span class="profile-stat-label">Tabs</span>
-            </div>
-            <div class="profile-stat-item">
-                <span class="profile-stat-value">10K</span>
-                <span class="profile-stat-label">Simulasi</span>
-            </div>
-            <div class="profile-stat-item">
-                <span class="profile-stat-value">100%</span>
-                <span class="profile-stat-label">Python</span>
-            </div>
-        </div>
-        
-        <div class="social-links">
-            <div class="social-icon">📧</div>
-            <div class="social-icon">💼</div>
-            <div class="social-icon">🐙</div>
-        </div>
-        
-        <div style="margin-top:16px;text-align:center;font-size:0.65rem;color:#6b7280;">
+    <div style="margin-top:24px;padding:14px;border-radius:14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);animation:borderGlow 6s ease infinite;">
+        <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;">💜 Dibuat oleh</div>
+        <div style="color:#e9d5ff;font-size:0.85rem;font-weight:700;">Muhammad Sheva Nabeel</div>
+        <div style="color:#6b7280;font-size:0.72rem;margin-top:3px;">Sains Data · 60125001</div>
+        <div style="margin-top:8px;font-size:0.65rem;color:#7c3aed;">
             <span class="emoji-float">🚀</span> Built with Streamlit + Plotly
         </div>
     </div>
@@ -1009,7 +845,7 @@ if budgeting_filter != "Semua":
 n = len(filtered)
 
 # ─────────────────────────────────────────────
-# HEADER DENGAN PROFIL
+# HEADER
 # ─────────────────────────────────────────────
 st.markdown("""
 <div style="margin-bottom:32px;animation:slideInFromLeft 0.8s ease-out;">

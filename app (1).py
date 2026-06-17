@@ -10,7 +10,7 @@ from scipy.stats import chi2_contingency
 # KONFIGURASI HALAMAN
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="Cyber Finance Dashboard ✨",
+    page_title="💰 Dashboard Analisis Keuangan Mahasiswa ✨",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded",

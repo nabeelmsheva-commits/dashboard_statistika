@@ -17,8 +17,8 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# DESIGN SYSTEM & CUSTOM CSS (GEN Z EDITION + FIX)
-# ────────────────────────────────────────────
+# DESIGN SYSTEM & CUSTOM CSS (GEN Z EDITION + FIX KEYBOARD_DOUBLE)
+# ─────────────────────────────────────────────
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -138,7 +138,6 @@ st.markdown("""
 
     /* ═══════════════════════════════════════
        FIX KEYBOARD_DOUBLE TOOLTIP BUG
-       (AGRESIF - MENYEMBUNYIKAN SEMUA TOOLTIP KEYBOARD)
     ═══════════════════════════════════════ */
     header[data-testid="stHeader"] {
         display: none !important;
@@ -166,16 +165,9 @@ st.markdown("""
         height: 0 !important;
     }
 
-    /* Sembunyikan semua span yang mengandung teks keyboard */
-    span[title*="keyboard"],
-    span[data-testid*="keyboard"],
-    div[title*="keyboard"] {
-        display: none !important;
-    }
-
     /* ═══════════════════════════════════════
        SIDEBAR
-    ══════════════════════════════════════ */
+    ═══════════════════════════════════════ */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, rgba(15,10,40,0.97) 0%, rgba(5,0,20,0.99) 100%);
         border-right: 1px solid rgba(168,85,247,0.2);
@@ -223,7 +215,7 @@ st.markdown("""
 
     /* ═══════════════════════════════════════
        METRIC CARDS (Glassmorphism + Glow)
-    ══════════════════════════════════════ */
+    ═══════════════════════════════════════ */
     [data-testid="metric-container"] {
         background: linear-gradient(135deg,
             rgba(99,102,241,0.15) 0%,
@@ -299,7 +291,7 @@ st.markdown("""
 
     /* ═══════════════════════════════════════
        TABS
-    ═══════════════════════════════════════ */
+    ══════════════════════════════════════ */
     .stTabs [data-baseweb="tab-list"] {
         background: rgba(15,10,40,0.7);
         border: 1px solid rgba(168,85,247,0.2);
@@ -350,7 +342,7 @@ st.markdown("""
         animation: bounceIn 0.4s ease-out;
     }
 
-    /* ═══════════════════════════════════════
+    /* ══════════════════════════════════════
        SECTION TITLES
     ═══════════════════════════════════════ */
     .section-title {
@@ -923,9 +915,10 @@ def style_fig(fig, height=380):
     return fig
 
 # ─────────────────────────────────────────────
-# SIDEBAR – FILTER
+# SIDEBAR – FILTER & PROFIL
 # ─────────────────────────────────────────────
 with st.sidebar:
+    # Logo & Branding
     st.markdown("""
     <div style="padding: 12px 0 24px 0; text-align:center;">
         <div style="font-size:2rem; animation: floatUp 3s ease-in-out infinite;">✨</div>
@@ -957,6 +950,8 @@ with st.sidebar:
     budgeting_filter = st.selectbox("Melakukan Budgeting", budgeting_options)
 
     st.markdown("<hr>", unsafe_allow_html=True)
+
+    # Dataset Info
     st.markdown(f"""
     <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:14px;padding:16px;animation:borderGlow 5s ease infinite;">
         <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;">📊 Dataset Info</div>
@@ -971,7 +966,9 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    # PROFILE SECTION IN SIDEBAR
+    # ══════════════════════════════════════
+    # PROFIL SECTION (BAGIAN KIRI)
+    # ═══════════════════════════════════════
     st.markdown("""
     <div class="profile-card" style="margin-top:24px;">
         <div class="profile-avatar">👨‍💻</div>
@@ -998,7 +995,7 @@ with st.sidebar:
         <div class="social-links">
             <div class="social-icon">📧</div>
             <div class="social-icon">💼</div>
-            <div class="social-icon"></div>
+            <div class="social-icon">🐙</div>
         </div>
         
         <div style="margin-top:16px;text-align:center;font-size:0.65rem;color:#6b7280;">
@@ -1053,17 +1050,17 @@ pct_belanja_sering = round(filtered[filtered["frekuensi_belanja_online"] == "3 k
 modus_pengeluaran = filtered["total_pengeluaran"].mode()[0] if n else "-"
 
 k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("👥 Responden",         f"{n} orang")
-k2.metric("️ Kehabisan Uang",    f"{pct_kehabisan}%",
+k1.metric(" Responden",         f"{n} orang")
+k2.metric("⚠️ Kehabisan Uang",    f"{pct_kehabisan}%",
           delta="Risiko sistemik" if pct_kehabisan > 35 else "Terkendali",
           delta_color="inverse" if pct_kehabisan > 35 else "normal")
 k3.metric("📒 Pakai Budgeting",   f"{pct_budgeting}%")
-k4.metric("🛒 Belanja Online ≥3x", f"{pct_belanja_sering}%")
+k4.metric(" Belanja Online ≥3x", f"{pct_belanja_sering}%")
 k5.metric("💸 Pengeluaran Utama", modus_pengeluaran.replace("Rp ", "Rp\u00A0"))
 
 st.markdown("<div style='margin-top:12px;'></div>", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# ────────────────────────────────────────────
 # TAB NAVIGASI
 # ─────────────────────────────────────────────
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -1071,7 +1068,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "💳 Pengeluaran",
     "🔍 Perilaku",
     "📈 Advanced",
-    "🎲 Monte Carlo",
+    " Monte Carlo",
 ])
 
 # ══════════════════════════════════════════════
@@ -1125,11 +1122,11 @@ with tab1:
         💡 <strong>Insight Demografi:</strong> Mayoritas responden <span class="badge">{round(filtered[filtered['uang_saku']=='Rp 500.000 - Rp 1.000.000'].shape[0]/n*100,1) if n else 0}%</span>
         berada di rentang uang saku Rp 500rb–Rp 1jt per bulan.
         <br>Perempuan mendominasi sampel dengan proporsi lebih tinggi.
-        <br><span class="emoji-float"></span> Data ini menunjukkan representasi yang cukup baik untuk analisis finansial mahasiswa.
+        <br><span class="emoji-float">📊</span> Data ini menunjukkan representasi yang cukup baik untuk analisis finansial mahasiswa.
     </div>
     """, unsafe_allow_html=True)
 
-# ═════════════════════════════════════════════
+# ══════════════════════════════════════════════
 # TAB 2 – POLA PENGELUARAN
 # ══════════════════════════════════════════════
 with tab2:
@@ -1200,7 +1197,7 @@ with tab2:
 
 # ══════════════════════════════════════════════
 # TAB 3 – PERILAKU KEUANGAN
-# ══════════════════════════════════════════════
+# ═════════════════════════════════════════════
 with tab3:
     col1, col2 = st.columns(2)
 
@@ -1312,7 +1309,7 @@ with tab4:
     with col_t:
         st.markdown(f"""
         <div style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:14px;padding:18px;margin-bottom:14px;animation:borderGlow 5s ease infinite;">
-            <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;">🏆 Modus</div>
+            <div style="font-size:0.65rem;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:.12em;"> Modus</div>
             <div style="color:#c4b5fd;font-weight:800;font-size:0.92rem;margin-top:6px;font-family:'JetBrains Mono',monospace;">{modus_val}</div>
         </div>
         <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:14px;padding:18px;animation:borderGlow 6s ease infinite;">
@@ -1325,7 +1322,7 @@ with tab4:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    st.markdown('<p class="section-title">Heatmap Asosiasi Antar Variabel (Cramér\'s V) 🔥</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Heatmap Asosiasi Antar Variabel (Cramér\'s V) </p>', unsafe_allow_html=True)
 
     cat_cols = [
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
@@ -1414,7 +1411,7 @@ with tab4:
     with st.expander("📂 Tampilkan Tabel Data"):
         st.dataframe(filtered.reset_index(drop=True), use_container_width=True)
         csv = filtered.to_csv(index=False).encode("utf-8")
-        st.download_button("️ Download CSV", data=csv,
+        st.download_button("⬇️ Download CSV", data=csv,
                            file_name="data_filtered.csv", mime="text/csv")
 
 # ══════════════════════════════════════════════
@@ -1446,7 +1443,7 @@ with tab5:
     run_btn = st.button("🚀 Jalankan Simulasi", use_container_width=True)
 
     if run_btn:
-        with st.spinner(" Menjalankan 10.000 iterasi..."):
+        with st.spinner("⚡ Menjalankan 10.000 iterasi..."):
             time.sleep(0.5)
             n_sim = 10000
 

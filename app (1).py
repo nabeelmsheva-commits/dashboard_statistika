@@ -414,7 +414,18 @@ hr {
 </style>
 """, unsafe_allow_html=True)
 
-# Tambahkan ini di dalam st.markdown() CSS yang sudah ada
+# ─────────────────────────────────────────────
+# FIX KEYBOARD DOUBLE BUG
+# ─────────────────────────────────────────────
+st.markdown("""
+<style>
+span[class*="keyboard"],
+div[class*="keyboard"],
+.keyboard_double {
+    display: none !important;
+}
+</style>
+""", unsafe_allow_html=True)# Tambahkan ini di dalam st.markdown() CSS yang sudah ada
 st.markdown("""
 <style>
 /* Hide keyboard_double text bug */

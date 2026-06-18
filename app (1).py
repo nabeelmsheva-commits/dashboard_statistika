@@ -414,23 +414,6 @@ hr {
 </style>
 """, unsafe_allow_html=True)
 
-# ────────────────────────────────────────────
-# FIX KEYBOARD DOUBLE BUG - SAFE VERSION
-# ─────────────────────────────────────────────
-st.markdown("""
-<style>
-/* Target spesifik untuk keyboard_double tanpa mempengaruhi sidebar */
-div[data-testid="stSidebar"] h1:first-of-type,
-div[data-testid="stSidebar"] > div > div > div > span {
-    display: none !important;
-}
-
-/* Force sidebar to show */
-section[data-testid="stSidebar"] {
-    display: flex !important;
-}
-</style>
-""", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
 # LOAD DATA

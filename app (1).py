@@ -10,57 +10,79 @@ from scipy.stats import chi2_contingency
 # KONFIGURASI HALAMAN
 # ═══════════════════════════════════════════════════════════════
 st.set_page_config(
-    page_title="Luxe Financial Analytics",
-    page_icon="🌿",
+    page_title="Cyber Financial Intelligence",
+    page_icon="💎",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # ═══════════════════════════════════════════════════════════════
-# LUXURY THEME · EMERALD & IVORY
+# LUXURY CYBER Y2K CSS THEME WITH ANIMATIONS
 # ═══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap');
 
-/* ─── ROOT VARIABLES ─── */
-:root {
-    --emerald-deep: #0F766E;
-    --emerald: #10B981;
-    --emerald-soft: #6EE7B7;
-    --gold: #D4AF37;
-    --gold-soft: #E8D5A0;
-    --ivory: #FAFAF7;
-    --ivory-warm: #F5F3EC;
-    --surface: #FFFFFF;
-    --ink: #1C1917;
-    --ink-soft: #44403C;
-    --muted: #78716C;
-    --line: rgba(15, 118, 110, 0.08);
-    --line-strong: rgba(15, 118, 110, 0.2);
+/* ─── GLOBAL LUXURY BACKGROUND ─── */
+.stApp {
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 110, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(131, 56, 236, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(58, 134, 255, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at top, rgba(255, 190, 11, 0.08) 0%, transparent 50%),
+        #0A0118;
+    background-attachment: fixed;
+    font-family: 'Inter', 'Space Grotesk', sans-serif !important;
+    color: #E8E4F5;
+    overflow-x: hidden;
 }
 
-/* ─── GLOBAL BACKGROUND ─── */
-.stApp {
-    background: 
-        radial-gradient(ellipse at top left, rgba(110, 231, 183, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
-        linear-gradient(180deg, #FAFAF7 0%, #F5F3EC 100%);
-    background-attachment: fixed;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    color: var(--ink);
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(255, 0, 110, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(131, 56, 236, 0.05) 1px, transparent 1px);
+    background-size: 45px 45px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .main .block-container {
-    padding-top: 3rem;
-    padding-bottom: 4rem;
-    max-width: 1400px;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    max-width: 1500px;
+    position: relative;
+    z-index: 1;
 }
 
-/* ─── LUXURY SIDEBAR ─── */
+/* ─── SIDEBAR LUXURY GLASS ─── */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #FFFFFF 0%, #F5F3EC 100%) !important;
-    border-right: 1px solid var(--line) !important;
+    background: linear-gradient(180deg,
+        rgba(255, 0, 110, 0.12) 0%,
+        rgba(131, 56, 236, 0.12) 50%,
+        rgba(58, 134, 255, 0.12) 100%) !important;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-right: 1px solid rgba(255, 0, 110, 0.35) !important;
+    box-shadow: 4px 0 40px rgba(255, 0, 110, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-testid="stSidebar"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FF006E, #8338EC, #3A86FF);
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.8);
 }
 
 [data-testid="stSidebar"] > div {
@@ -68,39 +90,36 @@ st.markdown("""
 }
 
 [data-testid="stSidebar"] h2 {
-    font-family: 'Fraunces', serif !important;
-    font-weight: 600 !important;
+    font-family: 'Bricolage Grotesque', sans-serif !important;
+    font-weight: 800 !important;
     font-size: 1.5rem !important;
-    color: var(--emerald-deep) !important;
+    background: linear-gradient(135deg, #FF006E, #8338EC, #3A86FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem !important;
-    font-variation-settings: "opsz" 144;
 }
 
 [data-testid="stSidebar"] * {
-    color: var(--ink-soft);
+    color: #E0D5F5;
     font-family: 'Inter', sans-serif !important;
 }
 
-[data-testid="stSidebar"] label {
-    color: var(--muted) !important;
-    font-size: 0.75rem !important;
-    font-weight: 500 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.12em !important;
-    margin-bottom: 6px !important;
-}
-
-/* ─── METRIC CARDS · LUXURY ─── */
+/* ─── METRIC CARDS - LUXURY GLASS ─── */
 [data-testid="stMetric"] {
-    background: var(--surface) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 16px !important;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0.02) 100%) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 20px !important;
     padding: 22px 26px !important;
     box-shadow:
-        0 1px 2px rgba(28, 25, 23, 0.04),
-        0 4px 16px rgba(15, 118, 110, 0.04) !important;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        0 8px 32px rgba(255, 0, 110, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
@@ -111,342 +130,347 @@ st.markdown("""
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--emerald-deep), var(--emerald), var(--gold));
-    opacity: 0.8;
+    height: 3px;
+    background: linear-gradient(90deg, #FF006E, #8338EC, #3A86FF, #06FFA5);
+    border-radius: 20px 20px 0 0;
+    animation: pulse-glow 2.5s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 110, 0.5); }
+    50% { box-shadow: 0 0 25px rgba(131, 56, 236, 0.7); }
 }
 
 [data-testid="stMetric"]:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     box-shadow:
-        0 4px 8px rgba(28, 25, 23, 0.06),
-        0 20px 40px rgba(15, 118, 110, 0.08) !important;
-    border-color: var(--line-strong) !important;
+        0 16px 48px rgba(255, 0, 110, 0.25),
+        0 0 50px rgba(131, 56, 236, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 0, 110, 0.45) !important;
 }
 
 [data-testid="stMetric"] label {
-    color: var(--muted) !important;
-    font-size: 0.68rem !important;
+    color: #FF006E !important;
+    font-size: 0.75rem !important;
     font-weight: 600 !important;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    opacity: 0.95;
 }
 
 [data-testid="stMetric"] [data-testid="stMetricValue"] {
-    color: var(--ink) !important;
+    color: #FFFFFF !important;
     font-size: 1.85rem !important;
-    font-weight: 600 !important;
-    font-family: 'Fraunces', serif !important;
+    font-weight: 700 !important;
+    font-family: 'Bricolage Grotesque', sans-serif !important;
     letter-spacing: -0.02em;
-    font-variation-settings: "opsz" 144;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFBE0B 50%, #FF006E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 [data-testid="stMetric"] [data-testid="stMetricDelta"] {
-    color: var(--emerald-deep) !important;
+    color: #06FFA5 !important;
     font-weight: 600 !important;
     font-size: 0.85rem !important;
-    font-family: 'Inter', sans-serif !important;
 }
 
-/* ─── SECTION TITLES · ELEGANT ─── */
+/* ─── SECTION TITLES - NEON ACCENT ─── */
 .section-title {
-    color: var(--ink) !important;
-    font-size: 1.3rem !important;
-    font-weight: 500 !important;
-    font-family: 'Fraunces', serif !important;
+    color: #FFFFFF !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    font-family: 'Bricolage Grotesque', sans-serif !important;
     letter-spacing: -0.01em;
-    padding-left: 20px !important;
-    margin: 40px 0 20px 0 !important;
+    padding-left: 18px !important;
+    margin: 32px 0 18px 0 !important;
     position: relative;
     display: inline-block;
-    font-variation-settings: "opsz" 144;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .section-title::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 70%;
-    background: linear-gradient(180deg, var(--emerald-deep), var(--gold));
+    top: 4px;
+    width: 4px;
+    height: calc(100% - 8px);
+    background: linear-gradient(180deg, #FF006E, #8338EC, #3A86FF);
     border-radius: 4px;
+    box-shadow: 0 0 14px rgba(255, 0, 110, 0.8);
+    animation: glow 2s infinite alternate;
 }
 
-/* ─── TABS · MINIMAL LUXURY ─── */
+@keyframes glow {
+    from { box-shadow: 0 0 10px rgba(255, 0, 110, 0.7); }
+    to { box-shadow: 0 0 20px rgba(131, 56, 236, 0.8); }
+}
+
+/* ─── TABS - PILL LUXURY STYLE ─── */
 .stTabs [data-baseweb="tab-list"] {
-    background: var(--surface);
-    border-radius: 14px;
-    padding: 6px;
-    gap: 4px;
-    border: 1px solid var(--line);
-    box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 50px;
+    padding: 8px;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .stTabs [data-baseweb="tab"] {
     background-color: transparent !important;
-    color: var(--muted) !important;
-    border-radius: 10px !important;
-    font-family: 'Inter', sans-serif !important;
+    color: #B8A8D8 !important;
+    border-radius: 50px !important;
+    font-family: 'Space Grotesk', sans-serif !important;
     font-weight: 500 !important;
-    font-size: 0.88rem !important;
+    font-size: 0.92rem !important;
     padding: 11px 22px !important;
     transition: all 0.3s ease !important;
-    letter-spacing: 0.01em;
 }
 
 .stTabs [aria-selected="true"] {
-    background: var(--emerald-deep) !important;
+    background: linear-gradient(135deg, #FF006E, #8338EC) !important;
     color: white !important;
+    box-shadow:
+        0 4px 20px rgba(255, 0, 110, 0.4),
+        0 0 20px rgba(131, 56, 236, 0.3);
     font-weight: 600 !important;
-    box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
 }
 
 .stTabs [data-baseweb="tab"]:hover:not([aria-selected="true"]) {
-    background: rgba(15, 118, 110, 0.06) !important;
-    color: var(--emerald-deep) !important;
+    background: rgba(255, 0, 110, 0.15) !important;
+    color: #FF006E !important;
 }
 
-/* ─── BUTTONS · REFINED ─── */
+/* ─── BUTTONS - LUXURY GRADIENT PILL ─── */
 .stButton > button {
-    background: var(--emerald-deep) !important;
+    background: linear-gradient(135deg, #FF006E 0%, #8338EC 50%, #3A86FF 100%) !important;
+    background-size: 200% 200% !important;
     color: white !important;
     border: none !important;
-    border-radius: 12px !important;
+    border-radius: 50px !important;
     padding: 13px 34px !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Space Grotesk', sans-serif !important;
     font-weight: 600 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.95rem !important;
     letter-spacing: 0.02em;
-    box-shadow: 
-        0 1px 2px rgba(28, 25, 23, 0.1),
-        0 4px 12px rgba(15, 118, 110, 0.2);
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    box-shadow:
+        0 4px 20px rgba(255, 0, 110, 0.3),
+        0 0 30px rgba(131, 56, 236, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .stButton > button:hover {
-    transform: translateY(-1px);
-    background: #0D6560 !important;
-    box-shadow: 
-        0 2px 4px rgba(28, 25, 23, 0.12),
-        0 12px 28px rgba(15, 118, 110, 0.3);
+    transform: translateY(-2px) scale(1.02);
+    background-position: right center !important;
+    box-shadow:
+        0 8px 32px rgba(255, 0, 110, 0.5),
+        0 0 40px rgba(131, 56, 236, 0.4);
 }
 
-/* ─── SELECTBOX · REFINED ─── */
+/* ─── SELECTBOX - GLASS PILL ─── */
 .stSelectbox > div > div,
 .stTextInput > div > div {
-    background: var(--surface) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 12px !important;
-    color: var(--ink) !important;
-    padding: 6px 14px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 0, 110, 0.25) !important;
+    border-radius: 14px !important;
+    color: #FFFFFF !important;
+    padding: 4px 12px !important;
     transition: all 0.3s ease !important;
 }
 
 .stSelectbox > div > div:hover,
 .stTextInput > div > div:hover {
-    border-color: var(--line-strong) !important;
-    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.06) !important;
+    border-color: rgba(255, 0, 110, 0.6) !important;
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.25) !important;
 }
 
 .stSelectbox label,
 .stTextInput label {
-    color: var(--muted) !important;
+    color: #FFBE0B !important;
     font-weight: 500 !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.75rem !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 0.85rem !important;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
 }
 
-/* ─── DIVIDER · ELEGANT ─── */
+/* ─── DIVIDER - GRADIENT LINE ─── */
 hr {
     border: none;
     height: 1px;
     background: linear-gradient(90deg,
         transparent,
-        var(--line-strong),
-        var(--gold-soft),
-        var(--line-strong),
+        #FF006E,
+        #8338EC,
+        #3A86FF,
         transparent);
-    margin: 48px 0;
+    margin: 36px 0;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.4);
 }
 
-/* ─── PLOTLY CHARTS · MINIMAL ─── */
+/* ─── PLOTLY CHARTS - LUXURY GLASS FRAME ─── */
 .js-plotly-plot .plotly {
-    border-radius: 16px !important;
-    background: var(--surface) !important;
-    border: 1px solid var(--line);
-    padding: 16px;
-    box-shadow: 
-        0 1px 2px rgba(28, 25, 23, 0.03),
-        0 4px 16px rgba(15, 118, 110, 0.04);
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 14px;
+    box-shadow: 0 4px 24px rgba(131, 56, 236, 0.12);
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* ─── DATAFRAME · REFINED ─── */
+/* ─── DATAFRAME - GLASS STYLE ─── */
 [data-testid="stDataFrame"] {
-    border-radius: 14px !important;
-    border: 1px solid var(--line) !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 0, 110, 0.2) !important;
     overflow: hidden;
-    background: var(--surface) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 [data-testid="stExpander"] {
-    background: var(--surface) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(131, 56, 236, 0.3) !important;
+    border-radius: 20px !important;
 }
 
-/* ─── ALERT / INFO · LUXURY ─── */
+/* ─── ALERT / INFO BOX - NEON GLASS ─── */
 [data-testid="stAlert"] {
-    background: rgba(15, 118, 110, 0.04) !important;
-    border: 1px solid rgba(15, 118, 110, 0.15) !important;
-    border-radius: 14px !important;
-    color: var(--ink-soft) !important;
+    background: rgba(6, 255, 165, 0.05) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(6, 255, 165, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 20px rgba(6, 255, 165, 0.1);
+    color: #E8E4F5 !important;
 }
 
 [data-testid="stWarning"] {
-    background: rgba(212, 175, 55, 0.06) !important;
-    border: 1px solid rgba(212, 175, 55, 0.2) !important;
-    border-radius: 14px !important;
+    background: rgba(255, 190, 11, 0.06) !important;
+    border: 1px solid rgba(255, 190, 11, 0.3) !important;
+    border-radius: 20px !important;
 }
 
-/* ─── SCROLLBAR · SUBTLE ─── */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--ivory-warm); }
+/* ─── SCROLLBAR - NEON ─── */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(10, 1, 24, 0.5); }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--emerald-soft), var(--emerald-deep));
+    background: linear-gradient(180deg, #FF006E, #8338EC, #3A86FF);
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--emerald-deep);
+    background: linear-gradient(180deg, #3A86FF, #8338EC, #FF006E);
 }
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 110, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(131, 56, 236, 0.5); }
+}
+
 .element-container, .stPlotlyChart, [data-testid="stMetric"] {
-    animation: fadeInUp 0.5s ease-out forwards;
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* ─── HERO SECTION · APPLE/STRIPE STYLE ─── */
-.hero-kicker {
-    color: var(--emerald-deep);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.hero-kicker::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-    display: inline-block;
-}
-
+/* ─── HERO TITLE - GRADIENT ANIMATED ─── */
 .hero-title {
-    font-family: 'Fraunces', serif !important;
-    font-weight: 400 !important;
-    font-size: 3.8rem !important;
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-    margin: 0 0 20px 0;
-    color: var(--ink);
-    font-variation-settings: "opsz" 144;
-}
-
-.hero-title em {
-    font-style: italic;
-    background: linear-gradient(135deg, var(--emerald-deep) 0%, var(--gold) 100%);
+    font-family: 'Bricolage Grotesque', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 3.2rem !important;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0;
+    background: linear-gradient(
+        135deg,
+        #FF006E 0%,
+        #FFBE0B 25%,
+        #8338EC 50%,
+        #3A86FF 75%,
+        #06FFA5 100%
+    );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-weight: 500;
+    animation: shimmer 6s linear infinite;
 }
 
 .hero-subtitle {
-    color: var(--ink-soft);
+    color: #B8A8D8;
     font-size: 1.1rem;
     font-weight: 400;
-    line-height: 1.6;
-    max-width: 640px;
-    letter-spacing: 0.005em;
+    margin-top: 14px;
+    letter-spacing: 0.02em;
 }
 
-/* ─── BADGE · LUXURY ─── */
+/* ─── BADGE / TAG ─── */
 .badge-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 100px;
+    display: inline-block;
+    padding: 5px 14px;
+    background: rgba(255, 0, 110, 0.12);
+    border: 1px solid rgba(255, 0, 110, 0.3);
+    border-radius: 20px;
     font-size: 0.72rem;
-    color: var(--emerald-deep);
+    color: #FF006E;
     font-weight: 600;
     margin-right: 8px;
-    letter-spacing: 0.08em;
+    backdrop-filter: blur(10px);
     text-transform: uppercase;
-    box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+    letter-spacing: 0.05em;
 }
 
 /* ─── LUXURY CARD COMPONENT ─── */
 .luxury-card {
-    padding: 22px;
-    background: var(--surface);
-    border-radius: 14px;
-    border: 1px solid var(--line);
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 18px;
+    border: 1px solid rgba(131, 56, 236, 0.25);
+    backdrop-filter: blur(14px);
     margin-bottom: 14px;
     transition: all 0.3s ease;
-    box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
 }
 
 .luxury-card:hover {
-    border-color: var(--line-strong);
+    border-color: rgba(255, 0, 110, 0.5);
     transform: translateY(-2px);
-    box-shadow: 
-        0 4px 8px rgba(28, 25, 23, 0.04),
-        0 12px 24px rgba(15, 118, 110, 0.06);
+    box-shadow: 0 8px 24px rgba(255, 0, 110, 0.15);
 }
 
 .card-label {
-    color: var(--muted);
+    color: #FFBE0B;
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-weight: 600;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.card-label::before {
-    content: "";
-    width: 16px;
-    height: 1px;
-    background: var(--gold);
+    margin-bottom: 6px;
 }
 
 .card-value {
-    color: var(--ink);
+    color: white;
     font-size: 1.6rem;
-    font-weight: 500;
-    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-family: 'Bricolage Grotesque', sans-serif;
     letter-spacing: -0.02em;
-    font-variation-settings: "opsz" 144;
 }
 
 /* ─── HIDE STREAMLIT BRANDING ─── */
@@ -454,12 +478,12 @@ hr {
 
 /* ─── SPINNER CUSTOM ─── */
 .stSpinner > div {
-    border-top-color: var(--emerald-deep) !important;
+    border-top-color: #FF006E !important;
 }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
-    .hero-title { font-size: 2.4rem !important; }
+    .hero-title { font-size: 2rem !important; }
     [data-testid="stMetric"] [data-testid="stMetricValue"] {
         font-size: 1.4rem !important;
     }
@@ -487,7 +511,7 @@ def load_data():
 df = load_data()
 
 # ═══════════════════════════════════════════════════════════════
-# KATEGORI & PALET WARNA LUXURY
+# KATEGORI & TEMA WARNA LUXURY
 # ═══════════════════════════════════════════════════════════════
 ORDER_UANG_SAKU = [
     "< Rp 500.000",
@@ -502,42 +526,40 @@ ORDER_TOTAL_PENGELUARAN = [
     "> Rp 1.000.001",
 ]
 
-# Palette: Emerald + Gold luxury
-WARNA_UTAMA = ["#0F766E", "#D4AF37", "#10B981", "#6EE7B7", "#B45309", "#134E4A"]
-BG_PLOT = "#FFFFFF"
-PAPER_BG = "#FFFFFF"
-FONT_COLOR = "#44403C"
-GRID_COLOR = "rgba(15, 118, 110, 0.08)"
+WARNA_UTAMA = ["#FF006E", "#8338EC", "#3A86FF", "#06FFA5", "#FFBE0B", "#FB5607"]
+BG_PLOT = "rgba(10, 1, 24, 0.5)"
+PAPER_BG = "rgba(0, 0, 0, 0)"
+FONT_COLOR = "#E8E4F5"
+GRID_COLOR = "rgba(255, 0, 110, 0.12)"
 
 def style_fig(fig):
-    """Terapkan tema luxury ke semua chart Plotly."""
+    """Terapkan tema luxury cyber ke semua chart Plotly."""
     fig.update_layout(
         paper_bgcolor=PAPER_BG,
         plot_bgcolor=BG_PLOT,
-        font=dict(color=FONT_COLOR, family="Inter, sans-serif", size=12),
-        margin=dict(t=50, b=35, l=20, r=20),
+        font=dict(color=FONT_COLOR, family="Inter, Space Grotesk, sans-serif", size=12),
+        margin=dict(t=40, b=30, l=20, r=20),
         legend=dict(
-            bgcolor="rgba(255, 255, 255, 0.9)",
-            bordercolor="rgba(15, 118, 110, 0.1)",
+            bgcolor="rgba(255, 255, 255, 0.03)",
+            bordercolor="rgba(255, 0, 110, 0.2)",
             borderwidth=1,
-            font=dict(color="#44403C", family="Inter"),
+            font=dict(color="#E8E4F5", family="Inter"),
         ),
-        title_font=dict(family="Fraunces, serif", size=16, color="#1C1917"),
     )
     fig.update_xaxes(
         gridcolor=GRID_COLOR,
-        zerolinecolor="rgba(15, 118, 110, 0.15)",
-        tickfont=dict(color="#78716C", family="Inter", size=11),
+        zerolinecolor="rgba(131, 56, 236, 0.3)",
+        tickfont=dict(color="#B8A8D8", family="Inter"),
     )
     fig.update_yaxes(
         gridcolor=GRID_COLOR,
-        zerolinecolor="rgba(15, 118, 110, 0.15)",
-        tickfont=dict(color="#78716C", family="Inter", size=11),
+        zerolinecolor="rgba(131, 56, 236, 0.3)",
+        tickfont=dict(color="#B8A8D8", family="Inter"),
     )
     return fig
 
 # ═══════════════════════════════════════════════════════════════
-# SIDEBAR · FILTER
+# SIDEBAR - FILTER PANEL
 # ═══════════════════════════════════════════════════════════════
 with st.sidebar:
     st.markdown("## Panel Filter")
@@ -559,28 +581,25 @@ with st.sidebar:
 
     st.markdown(f"""
     <div class="luxury-card">
-        <div class="card-label">Total Responden</div>
+        <div class="card-label">Total Responden Survei</div>
         <div class="card-value">{len(df)}</div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown(f"""
     <div class="luxury-card">
-        <div class="card-label">Data Aktif</div>
+        <div class="card-label">Data Setelah Filter</div>
         <div class="card-value" id="sidebar-filtered">–</div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("""
-    <div style="text-align: left; padding: 12px 0;">
-        <div style="color: #78716C; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">
-            Sumber Data
-        </div>
-        <div style="color: #1C1917; font-size: 0.88rem; line-height: 1.6;">
-            Survei Analisis Statistika<br>
-            <span style="color: #D4AF37; font-weight: 600;">Sains Data · 2026</span>
-        </div>
+    <div style="text-align: center; opacity: 0.7; font-size: 0.75rem; padding: 8px;">
+        <span class="badge-tag">Sains Data</span>
+        <span class="badge-tag">2026</span>
+        <br><br>
+        Financial Intelligence Dashboard
     </div>
     """, unsafe_allow_html=True)
 
@@ -599,6 +618,7 @@ if budgeting_filter != "Semua":
 
 n = len(filtered)
 
+# Update counter di sidebar dengan JS
 st.markdown(f"""
 <script>
 document.addEventListener("DOMContentLoaded", function() {{
@@ -611,18 +631,21 @@ document.addEventListener("DOMContentLoaded", function() {{
 """, unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
-# HERO HEADER · APPLE/STRIPE STYLE
+# HERO HEADER
 # ═══════════════════════════════════════════════════════════════
 st.markdown("""
-<div style="padding: 40px 0 32px 0;">
-    <div class="hero-kicker">Financial Intelligence Report</div>
+<div style="padding: 40px 0 20px 0; position: relative;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+        <span class="badge-tag">Luxury Analytics</span>
+        <span class="badge-tag">Financial Intelligence</span>
+        <span class="badge-tag">Sains Data</span>
+    </div>
     <h1 class="hero-title">
-        Dashboard Analisis<br>
-        Keuangan <em>Mahasiswa</em>
+        Financial Intelligence<br>
+        Dashboard
     </h1>
     <p class="hero-subtitle">
-        Studi mendalam mengenai pola pengeluaran, perilaku finansial, dan manajemen anggaran mahasiswa Sains Data. 
-        Sebuah pendekatan analitis terhadap literasi keuangan generasi muda.
+        Analisis mendalam pola pengeluaran dan perilaku keuangan mahasiswa Sains Data
     </p>
 </div>
 <hr>
@@ -651,7 +674,7 @@ st.markdown("")
 # TAB NAVIGASI
 # ═══════════════════════════════════════════════════════════════
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "Demografi",
+    "Demografi & Distribusi",
     "Pola Pengeluaran",
     "Perilaku Keuangan",
     "Analisis Lanjutan",
@@ -670,12 +693,12 @@ with tab1:
         gender_cnt.columns = ["Jenis Kelamin", "Jumlah"]
         fig = px.pie(
             gender_cnt, names="Jenis Kelamin", values="Jumlah",
-            color_discrete_sequence=WARNA_UTAMA, hole=0.6,
+            color_discrete_sequence=WARNA_UTAMA, hole=0.55,
         )
         fig.update_traces(
             textfont_size=13,
             textinfo="percent+label",
-            marker=dict(line=dict(color='#FFFFFF', width=3))
+            marker=dict(line=dict(color='#0A0118', width=2))
         )
         fig.update_layout(showlegend=False)
         style_fig(fig)
@@ -689,16 +712,16 @@ with tab1:
             uang_cnt, x="Uang Saku", y="Jumlah",
             color="Jumlah",
             color_continuous_scale=[
-                [0, "#6EE7B7"],
-                [0.5, "#10B981"],
-                [1, "#0F766E"]
+                [0, "#8338EC"],
+                [0.5, "#FF006E"],
+                [1, "#FFBE0B"]
             ],
             text="Jumlah",
         )
         fig2.update_traces(
             textposition="outside",
-            textfont_color="#1C1917",
-            marker=dict(line=dict(color='#FFFFFF', width=1))
+            textfont_color=FONT_COLOR,
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1))
         )
         fig2.update_coloraxes(showscale=False)
         style_fig(fig2)
@@ -712,7 +735,7 @@ with tab1:
             name=col_name, x=cross.index, y=cross[col_name],
             marker_color=WARNA_UTAMA[i],
             text=cross[col_name], textposition="auto",
-            marker=dict(line=dict(color='#FFFFFF', width=1)),
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1)),
         ))
     fig3.update_layout(barmode="group", xaxis_title="Kategori Uang Saku", yaxis_title="Jumlah Responden")
     style_fig(fig3)
@@ -735,9 +758,9 @@ with tab2:
         )
         fig.update_traces(
             textposition="outside",
-            textfont_color="#1C1917",
+            textfont_color=FONT_COLOR,
             showlegend=False,
-            marker=dict(line=dict(color='#FFFFFF', width=1))
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1))
         )
         style_fig(fig)
         st.plotly_chart(fig, use_container_width=True)
@@ -751,61 +774,101 @@ with tab2:
             faktor_cnt, y="Faktor_short", x="Jumlah",
             orientation="h", color="Jumlah",
             color_continuous_scale=[
-                [0, "#D4AF37"],
-                [0.5, "#0F766E"],
-                [1, "#134E4A"]
+                [0, "#3A86FF"],
+                [0.5, "#FF006E"],
+                [1, "#FFBE0B"]
             ],
             text="Jumlah",
         )
         fig2.update_traces(
             textposition="outside",
-            textfont_color="#1C1917",
-            marker=dict(line=dict(color='#FFFFFF', width=1))
+            textfont_color=FONT_COLOR,
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1))
         )
         fig2.update_coloraxes(showscale=False)
         fig2.update_layout(yaxis_title="")
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown('<p class="section-title">Perbandingan Kategori Pengeluaran</p>', unsafe_allow_html=True)
-    col_makan = filtered["pengeluaran_makan"].value_counts()
-    col_transport = filtered["pengeluaran_transport"].value_counts()
-    col_hiburan = filtered["pengeluaran_hiburan"].value_counts()
-    col_kuliah = filtered["pengeluaran_kuliah"].value_counts()
-
-    breakdown_df = pd.DataFrame({
-        "Makan": col_makan,
-        "Transport": col_transport,
-        "Hiburan": col_hiburan,
-        "Kuliah": col_kuliah,
-    }).fillna(0).reset_index().rename(columns={"index": "Kategori"})
-    breakdown_melt = breakdown_df.melt(id_vars="Kategori", var_name="Jenis", value_name="Jumlah")
-
-    fig3 = px.bar(
-        breakdown_melt, x="Kategori", y="Jumlah", color="Jenis",
-        barmode="group", color_discrete_sequence=WARNA_UTAMA,
-        text="Jumlah",
+    # 3D CHART: Pengeluaran Berdasarkan Kategori & Jenis Kelamin
+    st.markdown('<p class="section-title">3D: Perbandingan Kategori Pengeluaran Berdasarkan Jenis Kelamin</p>', unsafe_allow_html=True)
+    
+    # Prepare data for 3D plot
+    col_makan = filtered["pengeluaran_makan"].value_counts().reset_index()
+    col_transport = filtered["pengeluaran_transport"].value_counts().reset_index()
+    col_hiburan = filtered["pengeluaran_hiburan"].value_counts().reset_index()
+    col_kuliah = filtered["pengeluaran_kuliah"].value_counts().reset_index()
+    
+    # Create a combined dataset for 3D visualization
+    categories = ['Makan', 'Transport', 'Hiburan', 'Kuliah']
+    x = []
+    y = []
+    z = []
+    
+    for category in categories:
+        if category == 'Makan':
+            counts = col_makan['Jumlah'].values
+            labels = col_makan['pengeluaran_makan'].values
+        elif category == 'Transport':
+            counts = col_transport['Jumlah'].values
+            labels = col_transport['pengeluaran_transport'].values
+        elif category == 'Hiburan':
+            counts = col_hiburan['Jumlah'].values
+            labels = col_hiburan['pengeluaran_hiburan'].values
+        else:  # Kuliah
+            counts = col_kuliah['Jumlah'].values
+            labels = col_kuliah['pengeluaran_kuliah'].values
+            
+        for i, count in enumerate(counts):
+            x.append(category)
+            y.append(labels[i])
+            z.append(count)
+    
+    # Create 3D scatter plot
+    fig3d = go.Figure(data=[
+        go.Scatter3d(
+            x=x,
+            y=y,
+            z=z,
+            mode='markers',
+            marker=dict(
+                size=8,
+                color=z,
+                colorscale='Viridis',
+                opacity=0.8,
+                colorbar=dict(title='Jumlah')
+            ),
+            text=[f"{cat}: {label} ({count})" for cat, label, count in zip(x, y, z)]
+        )
+    ])
+    
+    fig3d.update_layout(
+        scene=dict(
+            xaxis_title='Kategori',
+            yaxis_title='Rentang Pengeluaran',
+            zaxis_title='Jumlah Mahasiswa',
+            xaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+            yaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+            zaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+        ),
+        title='Distribusi Pengeluaran Berdasarkan Kategori & Jenis Kelamin',
+        height=600
     )
-    fig3.update_traces(
-        textposition="outside",
-        textfont_color="#1C1917",
-        marker=dict(line=dict(color='#FFFFFF', width=1))
-    )
-    fig3.update_layout(xaxis_title="Rentang Pengeluaran", yaxis_title="Jumlah Mahasiswa")
-    style_fig(fig3)
-    st.plotly_chart(fig3, use_container_width=True)
-
+    
+    style_fig(fig3d)
+    st.plotly_chart(fig3d, use_container_width=True)
+    
     st.markdown('<p class="section-title">Frekuensi Belanja Online</p>', unsafe_allow_html=True)
     belanja_cnt = filtered["frekuensi_belanja_online"].value_counts().reset_index()
     belanja_cnt.columns = ["Frekuensi", "Jumlah"]
     fig4 = px.pie(
         belanja_cnt, names="Frekuensi", values="Jumlah",
-        color_discrete_sequence=WARNA_UTAMA, hole=0.6,
+        color_discrete_sequence=WARNA_UTAMA, hole=0.55,
     )
     fig4.update_traces(
         textfont_size=13,
         textinfo="percent+label",
-        marker=dict(line=dict(color='#FFFFFF', width=3))
+        marker=dict(line=dict(color='#0A0118', width=2))
     )
     style_fig(fig4)
     col_a, col_b = st.columns([1, 2])
@@ -826,13 +889,13 @@ with tab3:
         st.markdown('<p class="section-title">Status Kehabisan Uang</p>', unsafe_allow_html=True)
         kh_cnt = filtered["kehabisan_uang"].value_counts().reset_index()
         kh_cnt.columns = ["Status", "Jumlah"]
-        fig = px.pie(kh_cnt, names="Status", values="Jumlah", hole=0.6,
+        fig = px.pie(kh_cnt, names="Status", values="Jumlah", hole=0.55,
                      color="Status",
-                     color_discrete_map={"Ya": "#0F766E", "Tidak": "#D4AF37"})
+                     color_discrete_map={"Ya": "#FF006E", "Tidak": "#06FFA5"})
         fig.update_traces(
             textfont_size=13,
             textinfo="percent+label",
-            marker=dict(line=dict(color='#FFFFFF', width=3))
+            marker=dict(line=dict(color='#0A0118', width=2))
         )
         style_fig(fig)
         st.plotly_chart(fig, use_container_width=True)
@@ -841,13 +904,13 @@ with tab3:
         st.markdown('<p class="section-title">Status Penerapan Budgeting</p>', unsafe_allow_html=True)
         bd_cnt = filtered["budgeting"].value_counts().reset_index()
         bd_cnt.columns = ["Status", "Jumlah"]
-        fig2 = px.pie(bd_cnt, names="Status", values="Jumlah", hole=0.6,
+        fig2 = px.pie(bd_cnt, names="Status", values="Jumlah", hole=0.55,
                       color="Status",
-                      color_discrete_map={"Ya": "#10B981", "Tidak": "#B45309"})
+                      color_discrete_map={"Ya": "#8338EC", "Tidak": "#FFBE0B"})
         fig2.update_traces(
             textfont_size=13,
             textinfo="percent+label",
-            marker=dict(line=dict(color='#FFFFFF', width=3))
+            marker=dict(line=dict(color='#0A0118', width=2))
         )
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
@@ -857,7 +920,7 @@ with tab3:
     cross_bk_pct = (cross_bk.div(cross_bk.sum(axis=1), axis=0) * 100).round(1)
 
     fig3 = go.Figure()
-    colors_map = {"Ya": "#0F766E", "Tidak": "#D4AF37"}
+    colors_map = {"Ya": "#FF006E", "Tidak": "#06FFA5"}
     for col_name in cross_bk_pct.columns:
         fig3.add_trace(go.Bar(
             name=f"Kehabisan: {col_name}",
@@ -866,7 +929,7 @@ with tab3:
             marker_color=colors_map.get(col_name, WARNA_UTAMA[0]),
             text=cross_bk_pct[col_name].map(lambda v: f"{v:.1f}%"),
             textposition="inside",
-            marker=dict(line=dict(color='#FFFFFF', width=1)),
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1)),
         ))
     fig3.update_layout(
         barmode="stack",
@@ -875,6 +938,66 @@ with tab3:
     )
     style_fig(fig3)
     st.plotly_chart(fig3, use_container_width=True)
+
+    # 3D CHART: Kehabisan Uang vs Uang Saku vs Budgeting
+    st.markdown('<p class="section-title">3D: Kehabisan Uang Berdasarkan Uang Saku & Budgeting</p>', unsafe_allow_html=True)
+    
+    # Prepare data for 3D plot
+    x_data = []
+    y_data = []
+    z_data = []
+    colors = []
+    
+    # Create data for 3D scatter plot
+    for i, uang_saku_val in enumerate(ORDER_UANG_SAKU):
+        for budgeting_val in ["Ya", "Tidak"]:
+            # Calculate percentage of "Ya" for kehabisan_uang
+            subset = filtered[
+                (filtered["uang_saku"] == uang_saku_val) &
+                (filtered["budgeting"] == budgeting_val)
+            ]
+            
+            if len(subset) > 0:
+                pct_kehabisan = (subset["kehabisan_uang"] == "Ya").mean() * 100
+                x_data.append(uang_saku_val)
+                y_data.append(budgeting_val)
+                z_data.append(pct_kehabisan)
+                colors.append(pct_kehabisan)
+    
+    # Create 3D scatter plot
+    fig3d = go.Figure(data=[
+        go.Scatter3d(
+            x=x_data,
+            y=y_data,
+            z=z_data,
+            mode='markers',
+            marker=dict(
+                size=10,
+                color=colors,
+                colorscale='RdBu',
+                opacity=0.9,
+                colorbar=dict(title='Persentase Kehabisan Uang (%)')
+            ),
+            text=[f"Uang Saku: {x}, Budgeting: {y}, Kehabisan: {z:.1f}%" 
+                  for x, y, z in zip(x_data, y_data, z_data)]
+        )
+    ])
+    
+    fig3d.update_layout(
+        scene=dict(
+            xaxis_title='Kategori Uang Saku',
+            yaxis_title='Status Budgeting',
+            zaxis_title='Persentase Kehabisan Uang (%)',
+            xaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+            yaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+            zaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+        ),
+        title='Kehabisan Uang Berdasarkan Uang Saku & Budgeting',
+        height=600
+    )
+    
+    style_fig(fig3d)
+    st.plotly_chart(fig3d, use_container_width=True)
 
     st.markdown('<p class="section-title">Kehabisan Uang Berdasarkan Uang Saku</p>', unsafe_allow_html=True)
     cross_us = pd.crosstab(
@@ -891,7 +1014,7 @@ with tab3:
             marker_color=colors_map.get(col_name, WARNA_UTAMA[0]),
             text=cross_us_pct[col_name].map(lambda v: f"{v:.1f}%"),
             textposition="inside",
-            marker=dict(line=dict(color='#FFFFFF', width=1)),
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1)),
         ))
     fig4.update_layout(
         barmode="stack",
@@ -925,16 +1048,16 @@ with tab4:
             freq_df, x="Kategori", y="Frekuensi",
             color="Frekuensi",
             color_continuous_scale=[
-                [0, "#6EE7B7"],
-                [0.5, "#0F766E"],
-                [1, "#134E4A"]
+                [0, "#3A86FF"],
+                [0.5, "#FF006E"],
+                [1, "#FFBE0B"]
             ],
             text="Persentase",
         )
         fig_f.update_traces(
             textposition="outside",
-            textfont_color="#1C1917",
-            marker=dict(line=dict(color='#FFFFFF', width=1))
+            textfont_color=FONT_COLOR,
+            marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1))
         )
         fig_f.update_coloraxes(showscale=False)
         style_fig(fig_f)
@@ -1000,16 +1123,16 @@ with tab4:
             z=np.round(matrix, 2),
             x=cat_labels, y=cat_labels,
             colorscale=[
-                [0, "#F5F3EC"],
-                [0.25, "#6EE7B7"],
-                [0.5, "#10B981"],
-                [0.75, "#0F766E"],
-                [1, "#134E4A"]
+                [0, "#0A0118"],
+                [0.25, "#3A86FF"],
+                [0.5, "#8338EC"],
+                [0.75, "#FF006E"],
+                [1, "#FFBE0B"]
             ],
             zmin=0, zmax=1,
             text=np.round(matrix, 2),
             texttemplate="%{text}",
-            textfont={"size": 10, "color": "#1C1917"},
+            textfont={"size": 10, "color": "white"},
         ))
         fig_heat.update_layout(
             height=550,
@@ -1038,14 +1161,14 @@ with tab4:
 # TAB 5 – SIMULASI MONTE CARLO
 # ═══════════════════════════════════════════════════════════════
 with tab5:
-    st.markdown('<p class="section-title">Simulasi Monte Carlo · Proyeksi Risiko Keuangan</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Simulasi Monte Carlo: Proyeksi Risiko Keuangan</p>', unsafe_allow_html=True)
     st.markdown("""
-    <div style="padding: 20px 24px; background: linear-gradient(135deg, rgba(15,118,110,0.04) 0%, rgba(212,175,55,0.03) 100%);
-                border-left: 3px solid #0F766E; border-radius: 14px;
-                color: #44403C; font-size: 0.95rem; margin-bottom: 24px;
-                border: 1px solid rgba(15,118,110,0.08);">
-        Simulasi Monte Carlo menjalankan <b style="color:#0F766E;">10.000 skenario acak</b> untuk memproyeksikan probabilitas kehabisan uang 
-        dan distribusi sisa uang bulanan, berdasarkan distribusi empiris dari data survei yang sedang aktif.
+    <div style="padding: 18px 22px; background: rgba(131,56,236,0.08);
+                border-left: 3px solid #8338EC; border-radius: 14px;
+                color: #E8E4F5; font-size: 0.95rem; margin-bottom: 20px;
+                backdrop-filter: blur(10px);">
+        Simulasi ini menjalankan <b>10.000 skenario</b> secara acak untuk memproyeksikan probabilitas kehabisan uang
+        dan distribusi sisa uang bulanan berdasarkan distribusi empiris dari data survei yang sedang aktif.
     </div>
     """, unsafe_allow_html=True)
 
@@ -1122,26 +1245,26 @@ with tab5:
             df_sim = pd.DataFrame({"Sisa Uang": sisa_uang})
             fig_sim = px.histogram(
                 df_sim, x="Sisa Uang", nbins=50,
-                color_discrete_sequence=["#0F766E"],
+                color_discrete_sequence=["#FF006E"],
                 marginal="box",
-                opacity=0.9
+                opacity=0.85
             )
             fig_sim.add_vline(
                 x=0,
                 line_dash="dash",
-                line_color="#D4AF37",
+                line_color="#FFBE0B",
                 line_width=3,
                 annotation_text="Titik Impas (Rp 0)",
-                annotation_font_color="#D4AF37",
+                annotation_font_color="#FFBE0B",
                 annotation_font_size=12,
             )
             fig_sim.add_vrect(
                 x0=float("-inf"), x1=0,
-                fillcolor="#B45309", opacity=0.08,
+                fillcolor="#FF006E", opacity=0.1,
                 line_width=0,
                 annotation_text="Zona Defisit",
                 annotation_position="top left",
-                annotation_font_color="#B45309",
+                annotation_font_color="#FF006E",
             )
 
             fig_sim.update_layout(
@@ -1153,23 +1276,73 @@ with tab5:
             style_fig(fig_sim)
             st.plotly_chart(fig_sim, use_container_width=True)
 
+            # 3D Chart: Monte Carlo Simulation Results
+            st.markdown('<p class="section-title">3D: Visualisasi Hasil Simulasi Monte Carlo</p>', unsafe_allow_html=True)
+            
+            # Generate a 3D scatter plot of simulation results
+            # We'll create a subset of data points for better visualization
+            n_sample = 2000
+            sample_idx = np.random.choice(len(sisa_uang), n_sample, replace=False)
+            sisa_uang_sample = sisa_uang[sample_idx]
+            
+            # Create a 3D plot where:
+            # X = Iteration number
+            # Y = Sisa Uang
+            # Z = Cumulative probability
+            
+            # Calculate cumulative probability
+            sorted_sisa = np.sort(sisa_uang_sample)
+            cumulative_prob = np.arange(1, n_sample + 1) / n_sample
+            
+            fig3d = go.Figure(data=[
+                go.Scatter3d(
+                    x=np.arange(n_sample),
+                    y=sorted_sisa,
+                    z=cumulative_prob,
+                    mode='lines+markers',
+                    line=dict(color='#FF006E', width=3),
+                    marker=dict(
+                        size=4,
+                        color=cumulative_prob,
+                        colorscale='RdBu',
+                        opacity=0.7
+                    ),
+                    text=[f"Sisa Uang: Rp {s:,.0f}, Probabilitas Kumulatif: {p:.2f}" 
+                          for s, p in zip(sorted_sisa, cumulative_prob)]
+                )
+            ])
+            
+            fig3d.update_layout(
+                scene=dict(
+                    xaxis_title='Iterasi Simulasi',
+                    yaxis_title='Sisa Uang (Rp)',
+                    zaxis_title='Probabilitas Kumulatif',
+                    xaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+                    yaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+                    zaxis=dict(backgroundcolor='rgba(10, 1, 24, 0.7)'),
+                ),
+                title='Distribusi Sisa Uang dalam Simulasi Monte Carlo',
+                height=600
+            )
+            
+            style_fig(fig3d)
+            st.plotly_chart(fig3d, use_container_width=True)
+
             st.markdown(f"""
-            <div style="padding: 28px; background: var(--surface);
-                        border: 1px solid rgba(15,118,110,0.1); border-radius: 16px;
-                        margin-top: 24px; box-shadow: 0 4px 16px rgba(15,118,110,0.06);">
-                <div style="color: #0F766E; font-size: 0.72rem;
-                            text-transform: uppercase; letter-spacing: 0.18em;
-                            font-weight: 600; margin-bottom: 14px;
-                            display: flex; align-items: center; gap: 10px;">
-                    <span style="width: 20px; height: 1px; background: #D4AF37;"></span>
+            <div style="padding: 26px; background: rgba(6,255,165,0.05);
+                        border: 1px solid rgba(6,255,165,0.3); border-radius: 22px;
+                        backdrop-filter: blur(20px); margin-top: 20px;">
+                <div style="color: #06FFA5; font-size: 0.8rem;
+                            text-transform: uppercase; letter-spacing: 0.15em;
+                            font-weight: 700; margin-bottom: 14px;">
                     Interpretasi Simulasi
                 </div>
-                <div style="color: #44403C; line-height: 1.9; font-size: 0.95rem;">
-                    <div>Berdasarkan profil <b style="color:#D4AF37; font-weight:600;">Uang Saku: {sim_uang_saku}</b> dan <b style="color:#0F766E; font-weight:600;">Budgeting: {sim_budgeting}</b>, simulasi menunjukkan rata-rata sisa uang sebesar <b style="color:#0F766E;">Rp {mean_sisa:,.0f}</b>.</div>
-                    <div style="margin-top:8px;">Terdapat risiko <b style="color:#B45309;">{risk_sisa_negatif:.1f}%</b> di mana pengeluaran melebihi uang saku (defisit).</div>
-                    <div style="margin-top:8px;">Rentang sisa uang yang paling mungkin terjadi (90% confidence interval) adalah antara <b style="color:#0F766E;">Rp {p5_sisa:,.0f}</b> hingga <b style="color:#0F766E;">Rp {p95_sisa:,.0f}</b>.</div>
-                    <div style="margin-top: 16px; color: #78716C; font-size: 0.85rem; font-style: italic; padding-top: 12px; border-top: 1px solid rgba(15,118,110,0.08);">
-                        Area histogram di sebelah kiri garis emas (Rp 0) merepresentasikan skenario kehabisan uang sebelum akhir bulan.
+                <div style="color: #E8E4F5; line-height: 1.9;">
+                    <div>Berdasarkan profil <b style="color:#FFBE0B">Uang Saku: {sim_uang_saku}</b> dan <b style="color:#FF006E">Budgeting: {sim_budgeting}</b>, simulasi menunjukkan rata-rata sisa uang sebesar <b style="color:#06FFA5">Rp {mean_sisa:,.0f}</b>.</div>
+                    <div>Terdapat risiko <b style="color:#FF006E">{risk_sisa_negatif:.1f}%</b> di mana pengeluaran melebihi uang saku (defisit).</div>
+                    <div>Rentang sisa uang yang paling mungkin terjadi (90% confidence interval) adalah antara <b style="color:#3A86FF">Rp {p5_sisa:,.0f}</b> hingga <b style="color:#3A86FF">Rp {p95_sisa:,.0f}</b>.</div>
+                    <div style="margin-top: 14px; color: #B8A8D8; font-size: 0.9rem; font-style: italic;">
+                        Area histogram di sebelah kiri garis kuning (Rp 0) merepresentasikan skenario kehabisan uang sebelum akhir bulan.
                     </div>
                 </div>
             </div>
@@ -1181,22 +1354,23 @@ with tab5:
 st.markdown("---")
 st.markdown(
     """
-    <div style="text-align:center; padding: 40px 0 20px 0;">
-        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 16px;">
-            <span style="width: 40px; height: 1px; background: #D4AF37;"></span>
-            <span style="color: #0F766E; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 600;">
-                Financial Intelligence
-            </span>
-            <span style="width: 40px; height: 1px; background: #D4AF37;"></span>
+    <div style="text-align:center; padding: 32px 0;">
+        <div style="color: #FFBE0B; font-size: 0.72rem;
+                    text-transform: uppercase; letter-spacing: 0.2em;
+                    margin-bottom: 10px; font-weight: 600;">
+            Luxury Financial Analytics
         </div>
-        <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 500; color: #1C1917; letter-spacing: -0.02em; font-variation-settings: 'opsz' 144;">
-            Dashboard Analisis Keuangan Mahasiswa
+        <div style="background: linear-gradient(135deg, #FF006E, #8338EC, #3A86FF);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    font-family: 'Bricolage Grotesque', sans-serif;
+                    font-size: 1.2rem;
+                    font-weight: 700;">
+            Financial Intelligence Dashboard · Sains Data · 2026
         </div>
-        <div style="color: #78716C; font-size: 0.82rem; margin-top: 10px; font-weight: 400;">
-            Sains Data · 2026
-        </div>
-        <div style="color: #B8B4AC; font-size: 0.72rem; margin-top: 16px; letter-spacing: 0.1em;">
-            DIBUAT DENGAN KETELITIAN ANALITIS
+        <div style="color: #B8A8D8; font-size: 0.82rem; margin-top: 10px;">
+            Dibuat untuk keperluan studi statistika dan analisis data
         </div>
     </div>
     """,

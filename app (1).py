@@ -10,20 +10,20 @@ from scipy.stats import chi2_contingency
 # KONFIGURASI HALAMAN
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="💖 Gen Z Finance Hub ✨",
-    page_icon="💅",
+    page_title="Analisis Keuangan Mahasiswa",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # ─────────────────────────────────────────────
-# CUSTOM CSS - Y2K CYBER POP THEME 🌸
+# CUSTOM CSS - CYBER THEME
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@400;600;800&display=swap');
 
-/* ─── GLOBAL Y2K BACKGROUND ─── */
+/* ─── GLOBAL CYBER BACKGROUND ─── */
 .stApp {
     background: 
         radial-gradient(circle at 20% 20%, rgba(255, 0, 110, 0.15) 0%, transparent 50%),
@@ -434,7 +434,7 @@ def load_data():
 df = load_data()
 
 # ─────────────────────────────────────────────
-# GEN Z COLOR PALETTE 🌈
+# COLOR PALETTE
 # ─────────────────────────────────────────────
 ORDER_UANG_SAKU = [
     "< Rp 500.000",
@@ -449,7 +449,6 @@ ORDER_TOTAL_PENGELUARAN = [
     "> Rp 1.000.001",
 ]
 
-# 🎨 Gen Z Vibrant Palette
 WARNA_UTAMA = ["#FF006E", "#8338EC", "#3A86FF", "#06FFA5", "#FFBE0B", "#FB5607"]
 BG_PLOT = "rgba(13, 2, 33, 0.4)"
 PAPER_BG = "rgba(0, 0, 0, 0)"
@@ -457,7 +456,7 @@ FONT_COLOR = "#E0D5F5"
 GRID_COLOR = "rgba(255, 0, 110, 0.12)"
 
 def style_fig(fig):
-    """Terapkan tema Y2K Cyber Pop ke semua chart Plotly."""
+    """Terapkan tema cyber ke semua chart Plotly."""
     fig.update_layout(
         paper_bgcolor=PAPER_BG,
         plot_bgcolor=BG_PLOT,
@@ -483,23 +482,23 @@ def style_fig(fig):
     return fig
 
 # ─────────────────────────────────────────────
-# SIDEBAR – FILTER ✨
+# SIDEBAR – FILTER
 # ─────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## 💅 filter zone")
+    st.markdown("## Panel Filter Data")
     st.markdown("---")
 
     gender_options = ["Semua"] + sorted(df["jenis_kelamin"].unique().tolist())
-    gender_filter = st.selectbox("👤 gender", gender_options)
+    gender_filter = st.selectbox("Jenis Kelamin", gender_options)
 
     uang_saku_options = ["Semua"] + ORDER_UANG_SAKU
-    uang_saku_filter = st.selectbox("💸 uang saku", uang_saku_options)
+    uang_saku_filter = st.selectbox("Kategori Uang Saku", uang_saku_options)
 
     kehabisan_options = ["Semua", "Ya", "Tidak"]
-    kehabisan_filter = st.selectbox("⚠️ pernah broke?", kehabisan_options)
+    kehabisan_filter = st.selectbox("Status Kehabisan Uang", kehabisan_options)
 
     budgeting_options = ["Semua", "Ya", "Tidak"]
-    budgeting_filter = st.selectbox("📒 budgeting era?", budgeting_options)
+    budgeting_filter = st.selectbox("Status Budgeting", budgeting_options)
 
     st.markdown("---")
     
@@ -510,7 +509,7 @@ with st.sidebar:
                 backdrop-filter: blur(10px);">
         <div style="color: #FFBE0B; font-size: 0.7rem; 
                     text-transform: uppercase; letter-spacing: 0.15em;">
-            Total Besties Surveyed
+            Total Responden
         </div>
         <div style="color: white; font-size: 2rem; font-weight: 700; 
                     font-family: 'Bricolage Grotesque', sans-serif;">
@@ -525,7 +524,7 @@ with st.sidebar:
         <span class="badge-tag">Sains Data</span>
         <span class="badge-tag">2026</span>
         <br><br>
-        💖 made with vibes ✨
+        Analisis Statistik Keuangan Mahasiswa
     </div>
     """, unsafe_allow_html=True)
 
@@ -545,28 +544,28 @@ if budgeting_filter != "Semua":
 n = len(filtered)
 
 # ─────────────────────────────────────────────
-# HERO HEADER 💖
+# HERO HEADER
 # ─────────────────────────────────────────────
 st.markdown("""
 <div style="padding: 32px 0 16px 0;">
     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-        <span class="badge-tag">✨ Gen Z Edition</span>
-        <span class="badge-tag">📊 Financial Vibe Check</span>
-        <span class="badge-tag">💅 Slay Era</span>
+        <span class="badge-tag">Analisis Komprehensif</span>
+        <span class="badge-tag">Keuangan Mahasiswa</span>
+        <span class="badge-tag">Statistika</span>
     </div>
     <h1 class="hero-title">
-        Money Diaries 💸<br>
-        Gen Z Finance Hub
+        Dashboard Analisis<br>
+        Keuangan Mahasiswa
     </h1>
     <p class="hero-subtitle">
-        spill the tea on mahasiswa Sains Data spending habits 🌸
+        Studi pola pengeluaran dan perilaku keuangan mahasiswa Sains Data
     </p>
 </div>
 <hr>
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
-# KPI CARDS ✨
+# KPI CARDS
 # ─────────────────────────────────────────────
 k1, k2, k3, k4, k5 = st.columns(5)
 
@@ -576,33 +575,33 @@ pct_belanja_sering = round(filtered[filtered["frekuensi_belanja_online"] == "3 k
 modus_pengeluaran = filtered["total_pengeluaran"].mode()[0] if n else "-"
 modus_uang_saku = filtered["uang_saku"].mode()[0] if n else "-"
 
-k1.metric("👥 besties", f"{n}")
-k2.metric("😭 broke era", f"{pct_kehabisan}%")
-k3.metric("💼 budgeting queen", f"{pct_budgeting}%")
-k4.metric("🛒 shopping spree", f"{pct_belanja_sering}%")
-k5.metric("💸 main expense", modus_pengeluaran.replace("Rp ", "Rp\u00A0"))
+k1.metric("Total Responden", f"{n}")
+k2.metric("Persentase Kehabisan Uang", f"{pct_kehabisan}%")
+k3.metric("Persentase Budgeting", f"{pct_budgeting}%")
+k4.metric("Belanja Online ≥ 3x/bulan", f"{pct_belanja_sering}%")
+k5.metric("Modus Pengeluaran", modus_pengeluaran.replace("Rp ", "Rp\u00A0"))
 
 st.markdown("")
 
 # ─────────────────────────────────────────────
-# TAB NAVIGASI 💅
+# TAB NAVIGASI
 # ─────────────────────────────────────────────
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "🌸 demografi",
-    "💳 spending",
-    "🔍 behavior",
-    "📈 deep dive",
-    "🎲 monte carlo",
+    "Demografi",
+    "Pola Pengeluaran",
+    "Perilaku Keuangan",
+    "Analisis Lanjutan",
+    "Simulasi Monte Carlo",
 ])
 
 # ══════════════════════════════════════════════
-# TAB 1 – DEMOGRAFI & DISTRIBUSI 🌸
+# TAB 1 – DEMOGRAFI & DISTRIBUSI
 # ══════════════════════════════════════════════
 with tab1:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown('<p class="section-title">gender breakdown</p>', unsafe_allow_html=True)
+        st.markdown('<p class="section-title">Distribusi Jenis Kelamin</p>', unsafe_allow_html=True)
         gender_cnt = filtered["jenis_kelamin"].value_counts().reset_index()
         gender_cnt.columns = ["Jenis Kelamin", "Jumlah"]
         fig = px.pie(
@@ -619,7 +618,7 @@ with tab1:
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        st.markdown('<p class="section-title">monthly allowance 💸</p>', unsafe_allow_html=True)
+        st.markdown('<p class="section-title">Distribusi Uang Saku Bulanan</p>', unsafe_allow_html=True)
         uang_cnt = filtered["uang_saku"].value_counts().reindex(ORDER_UANG_SAKU, fill_value=0).reset_index()
         uang_cnt.columns = ["Uang Saku", "Jumlah"]
         fig2 = px.bar(
@@ -641,7 +640,7 @@ with tab1:
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown('<p class="section-title">allowance × gender 👀</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Distribusi Uang Saku Berdasarkan Jenis Kelamin</p>', unsafe_allow_html=True)
     cross = pd.crosstab(filtered["uang_saku"], filtered["jenis_kelamin"]).reindex(ORDER_UANG_SAKU, fill_value=0)
     fig3 = go.Figure()
     for i, col_name in enumerate(cross.columns):
@@ -651,18 +650,18 @@ with tab1:
             text=cross[col_name], textposition="auto",
             marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1)),
         ))
-    fig3.update_layout(barmode="group", xaxis_title="Uang Saku", yaxis_title="Jumlah")
+    fig3.update_layout(barmode="group", xaxis_title="Kategori Uang Saku", yaxis_title="Jumlah Responden")
     style_fig(fig3)
     st.plotly_chart(fig3, use_container_width=True)
 
 # ══════════════════════════════════════════════
-# TAB 2 – POLA PENGELUARAN 💳
+# TAB 2 – POLA PENGELUARAN
 # ══════════════════════════════════════════════
 with tab2:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown('<p class="section-title">total spending vibe</p>', unsafe_allow_html=True)
+        st.markdown('<p class="section-title">Distribusi Total Pengeluaran</p>', unsafe_allow_html=True)
         tot_cnt = filtered["total_pengeluaran"].value_counts().reindex(ORDER_TOTAL_PENGELUARAN, fill_value=0).reset_index()
         tot_cnt.columns = ["Total Pengeluaran", "Jumlah"]
         fig = px.bar(
@@ -680,7 +679,7 @@ with tab2:
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        st.markdown('<p class="section-title">biggest money drains 🕳️</p>', unsafe_allow_html=True)
+        st.markdown('<p class="section-title">Faktor Penyebab Pengeluaran Membengkak</p>', unsafe_allow_html=True)
         faktor_cnt = filtered["faktor_membengkak"].value_counts().reset_index()
         faktor_cnt.columns = ["Faktor", "Jumlah"]
         faktor_cnt["Faktor_short"] = faktor_cnt["Faktor"].str.extract(r'^([^(]+)').iloc[:, 0].str.strip()
@@ -704,7 +703,7 @@ with tab2:
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown('<p class="section-title">expense category breakdown 🍰</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Distribusi Pengeluaran Berdasarkan Kategori</p>', unsafe_allow_html=True)
     col_makan = filtered["pengeluaran_makan"].value_counts()
     col_transport = filtered["pengeluaran_transport"].value_counts()
     col_hiburan = filtered["pengeluaran_hiburan"].value_counts()
@@ -728,11 +727,11 @@ with tab2:
         textfont_color=FONT_COLOR,
         marker=dict(line=dict(color='rgba(255,255,255,0.1)', width=1))
     )
-    fig3.update_layout(xaxis_title="Range", yaxis_title="Jumlah Mahasiswa")
+    fig3.update_layout(xaxis_title="Rentang Pengeluaran", yaxis_title="Jumlah Mahasiswa")
     style_fig(fig3)
     st.plotly_chart(fig3, use_container_width=True)
 
-    st.markdown('<p class="section-title">online shopping habit 🛍️</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Frekuensi Belanja Online</p>', unsafe_allow_html=True)
     belanja_cnt = filtered["frekuensi_belanja_online"].value_counts().reset_index()
     belanja_cnt.columns = ["Frekuensi", "Jumlah"]
     fig4 = px.pie(
@@ -754,13 +753,13 @@ with tab2:
         st.dataframe(freq_tbl, use_container_width=True, hide_index=True)
 
 # ══════════════════════════════════════════════
-# TAB 3 – PERILAKU KEUANGAN 🔍
+# TAB 3 – PERILAKU KEUANGAN
 # ══════════════════════════════════════════════
 with tab3:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown('<p class="section-title">broke era? 😭</p>', unsafe_allow_html=True)
+        st.markdown('<p class="section-title">Status Kehabisan Uang</p>', unsafe_allow_html=True)
         kh_cnt = filtered["kehabisan_uang"].value_counts().reset_index()
         kh_cnt.columns = ["Status", "Jumlah"]
         fig = px.pie(kh_cnt, names="Status", values="Jumlah", hole=0.6,
@@ -775,7 +774,7 @@ with tab3:
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        st.markdown('<p class="section-title">budgeting era? 💼</p>', unsafe_allow_html=True)
+        st.markdown('<p class="section-title">Status Penerapan Budgeting</p>', unsafe_allow_html=True)
         bd_cnt = filtered["budgeting"].value_counts().reset_index()
         bd_cnt.columns = ["Status", "Jumlah"]
         fig2 = px.pie(bd_cnt, names="Status", values="Jumlah", hole=0.6,
@@ -789,7 +788,7 @@ with tab3:
         style_fig(fig2)
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown('<p class="section-title">budgeting × broke era ☕</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Hubungan Budgeting dan Status Kehabisan Uang</p>', unsafe_allow_html=True)
     cross_bk = pd.crosstab(filtered["budgeting"], filtered["kehabisan_uang"])
     cross_bk_pct = (cross_bk.div(cross_bk.sum(axis=1), axis=0) * 100).round(1)
 
@@ -797,7 +796,7 @@ with tab3:
     colors_map = {"Ya": "#FF006E", "Tidak": "#06FFA5"}
     for col_name in cross_bk_pct.columns:
         fig3.add_trace(go.Bar(
-            name=f"Kehabisan: {col_name}",
+            name=f"Kehabisan Uang: {col_name}",
             x=cross_bk_pct.index,
             y=cross_bk_pct[col_name],
             marker_color=colors_map.get(col_name, WARNA_UTAMA[0]),
@@ -807,13 +806,13 @@ with tab3:
         ))
     fig3.update_layout(
         barmode="stack",
-        xaxis_title="Budgeting",
+        xaxis_title="Status Budgeting",
         yaxis_title="Persentase (%)",
     )
     style_fig(fig3)
     st.plotly_chart(fig3, use_container_width=True)
 
-    st.markdown('<p class="section-title">broke × allowance level 💸</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Hubungan Kategori Uang Saku dan Status Kehabisan Uang</p>', unsafe_allow_html=True)
     cross_us = pd.crosstab(
         filtered["uang_saku"], filtered["kehabisan_uang"]
     ).reindex(ORDER_UANG_SAKU, fill_value=0)
@@ -822,7 +821,7 @@ with tab3:
     fig4 = go.Figure()
     for col_name in cross_us_pct.columns:
         fig4.add_trace(go.Bar(
-            name=f"Kehabisan: {col_name}",
+            name=f"Kehabisan Uang: {col_name}",
             x=cross_us_pct.index,
             y=cross_us_pct[col_name],
             marker_color=colors_map.get(col_name, WARNA_UTAMA[0]),
@@ -832,18 +831,18 @@ with tab3:
         ))
     fig4.update_layout(
         barmode="stack",
-        xaxis_title="Uang Saku",
+        xaxis_title="Kategori Uang Saku",
         yaxis_title="Persentase (%)",
     )
     style_fig(fig4)
     st.plotly_chart(fig4, use_container_width=True)
 
 # ══════════════════════════════════════════════
-# TAB 4 – ANALISIS LANJUTAN 📈
+# TAB 4 – ANALISIS LANJUTAN
 # ══════════════════════════════════════════════
 with tab4:
-    st.markdown('<p class="section-title">📋 frequency table deep dive</p>', unsafe_allow_html=True)
-    col_select = st.selectbox("pilih kolomnya bestie:", [
+    st.markdown('<p class="section-title">Tabel Frekuensi Detail</p>', unsafe_allow_html=True)
+    col_select = st.selectbox("Pilih Variabel:", [
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
         "pengeluaran_transport", "pengeluaran_hiburan", "pengeluaran_kuliah",
         "kehabisan_uang", "budgeting", "faktor_membengkak", "frekuensi_belanja_online",
@@ -883,7 +882,7 @@ with tab4:
                     backdrop-filter: blur(10px); margin-bottom: 12px;">
             <div style="color: #FFBE0B; font-size: 0.7rem; 
                         text-transform: uppercase; letter-spacing: 0.15em;">
-                ✨ Top Vibe (Modus)
+                Modus (Nilai Terbanyak)
             </div>
             <div style="color: white; font-size: 1rem; font-weight: 600; margin-top: 4px;">
                 {modus_val}
@@ -894,7 +893,7 @@ with tab4:
                     backdrop-filter: blur(10px);">
             <div style="color: #FF006E; font-size: 0.7rem; 
                         text-transform: uppercase; letter-spacing: 0.15em;">
-                👥 Besties Count
+                Jumlah Observasi
             </div>
             <div style="color: white; font-size: 1.5rem; font-weight: 700; margin-top: 4px;">
                 {n}
@@ -906,7 +905,7 @@ with tab4:
 
     st.markdown("---")
 
-    st.markdown('<p class="section-title">🔥 association heatmap (cramér\'s V)</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Heatmap Asosiasi (Cramér\'s V)</p>', unsafe_allow_html=True)
 
     cat_cols = [
         "uang_saku", "total_pengeluaran", "pengeluaran_makan",
@@ -915,7 +914,7 @@ with tab4:
         "frekuensi_belanja_online", "jenis_kelamin",
     ]
     cat_labels = [
-        "Uang Saku", "Total", "Makan",
+        "Uang Saku", "Total Pengeluaran", "Makan",
         "Transport", "Hiburan", "Kuliah",
         "Kehabisan", "Budget", "Faktor",
         "Belanja", "Gender",
@@ -968,45 +967,45 @@ with tab4:
         )
         style_fig(fig_heat)
         st.plotly_chart(fig_heat, use_container_width=True)
-        st.caption("✨ Cramér's V: 0 = no vibes (no association), 1 = perfect match")
+        st.caption("Cramér's V: 0 = tidak ada asosiasi, 1 = asosiasi sempurna")
     else:
-        st.warning("Data terlalu sedikit. Hapus filter untuk melihat heatmap 💔")
+        st.warning("Data tidak mencukupi. Hapus filter untuk melihat heatmap.")
 
     st.markdown("---")
 
-    st.markdown('<p class="section-title">📄 raw data spill</p>', unsafe_allow_html=True)
-    with st.expander("✨ peek the data bestie"):
+    st.markdown('<p class="section-title">Data Mentah</p>', unsafe_allow_html=True)
+    with st.expander("Lihat Data Mentah"):
         st.dataframe(filtered.reset_index(drop=True), use_container_width=True)
         csv = filtered.to_csv(index=False).encode("utf-8")
         st.download_button(
-            "⬇️ Download CSV",
+            "Unduh CSV",
             data=csv,
-            file_name="gen_z_finance_data.csv",
+            file_name="data_keuangan_mahasiswa.csv",
             mime="text/csv",
         )
 
 # ══════════════════════════════════════════════
-# TAB 5 – SIMULASI MONTE CARLO 🎲
+# TAB 5 – SIMULASI MONTE CARLO
 # ══════════════════════════════════════════════
 with tab5:
-    st.markdown('<p class="section-title">🎲 monte carlo: future finance glow-up</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-title">Simulasi Monte Carlo: Proyeksi Keuangan</p>', unsafe_allow_html=True)
     st.markdown("""
     <div style="padding: 16px 20px; background: rgba(131,56,236,0.08); 
                 border-left: 3px solid #8338EC; border-radius: 12px;
                 color: #E0D5F5; font-size: 0.95rem; margin-bottom: 16px;">
-        ✨ <b>vibe check your money future!</b> simulasi ini jalanin <b>10,000 skenario</b> 
-        buat prediksi probabilitas broke era dan sisa uang bulanan kamu. manifest that glow-up! 💫
+        <b>Proyeksi Keuangan Masa Depan</b> — Simulasi ini menjalankan <b>10.000 skenario</b> 
+        untuk memprediksi probabilitas kehabisan uang dan estimasi sisa uang bulanan berdasarkan data historis.
     </div>
     """, unsafe_allow_html=True)
     
     col_sim1, col_sim2 = st.columns(2)
     with col_sim1:
-        sim_uang_saku = st.selectbox("💸 pilih allowance level:", ORDER_UANG_SAKU, index=1)
+        sim_uang_saku = st.selectbox("Pilih Kategori Uang Saku:", ORDER_UANG_SAKU, index=1)
     with col_sim2:
-        sim_budgeting = st.selectbox("💼 budgeting era?:", ["Ya", "Tidak"])
+        sim_budgeting = st.selectbox("Status Budgeting:", ["Ya", "Tidak"])
         
-    if st.button("✨ manifest your future ✨", type="primary"):
-        with st.spinner("🔮 reading your financial future..."):
+    if st.button("Jalankan Simulasi", type="primary"):
+        with st.spinner("Memproses simulasi..."):
             n_sim = 10000
             
             ref_data = filtered[(filtered["uang_saku"] == sim_uang_saku) & (filtered["budgeting"] == sim_budgeting)]
@@ -1051,23 +1050,23 @@ with tab5:
             
             kpi1, kpi2, kpi3 = st.columns(3)
             kpi1.metric(
-                "😭 broke probability", 
+                "Probabilitas Kehabisan Uang", 
                 f"{prob_khabis:.1f}%", 
                 delta=f"{delta_khabis:+.1f}%", 
                 delta_color="inverse" if prob_khabis > overall_khabis else "normal"
             )
             kpi2.metric(
-                "💰 avg leftover", 
+                "Rata-rata Sisa Uang", 
                 f"Rp {mean_sisa:,.0f}"
             )
             kpi3.metric(
-                "⚠️ deficit risk", 
+                "Risiko Defisit", 
                 f"{risk_sisa_negatif:.1f}%"
             )
             
             st.markdown("---")
             
-            st.markdown('<p class="section-title">💸 money distribution glow-up chart</p>', unsafe_allow_html=True)
+            st.markdown('<p class="section-title">Distribusi Proyeksi Sisa Uang</p>', unsafe_allow_html=True)
             
             df_sim = pd.DataFrame({"Sisa Uang": sisa_uang})
             fig_sim = px.histogram(
@@ -1081,7 +1080,7 @@ with tab5:
                 line_dash="dash", 
                 line_color="#FFBE0B", 
                 line_width=3,
-                annotation_text="✨ break even point ✨",
+                annotation_text="Titik Impas (Break Even Point)",
                 annotation_font_color="#FFBE0B",
                 annotation_font_size=12,
             )
@@ -1089,7 +1088,7 @@ with tab5:
                 x0=float("-inf"), x1=0,
                 fillcolor="#FF006E", opacity=0.1,
                 line_width=0,
-                annotation_text="😭 broke zone",
+                annotation_text="Zona Defisit",
                 annotation_position="top left",
                 annotation_font_color="#FF006E",
             )
@@ -1110,23 +1109,23 @@ with tab5:
                 <div style="color: #06FFA5; font-size: 0.8rem; 
                             text-transform: uppercase; letter-spacing: 0.15em; 
                             font-weight: 600; margin-bottom: 12px;">
-                    💫 your financial forecast
+                    Ringkasan Proyeksi Keuangan
                 </div>
                 <div style="color: #E0D5F5; line-height: 1.8;">
-                    <div>🌸 <b>your profile:</b> allowance <b style="color:#FFBE0B">{sim_uang_saku}</b> + budgeting <b style="color:#FF006E">{sim_budgeting}</b></div>
-                    <div>💰 <b>avg leftover:</b> <b style="color:#06FFA5">Rp {mean_sisa:,.0f}</b></div>
-                    <div>⚠️ <b>deficit risk:</b> <b style="color:#FF006E">{risk_sisa_negatif:.1f}%</b></div>
-                    <div>📊 <b>90% confidence interval:</b> <b style="color:#3A86FF">Rp {p5_sisa:,.0f}</b> — <b style="color:#3A86FF">Rp {p95_sisa:,.0f}</b></div>
+                    <div><b>Profil Simulasi:</b> Uang saku <b style="color:#FFBE0B">{sim_uang_saku}</b> dengan status budgeting <b style="color:#FF006E">{sim_budgeting}</b></div>
+                    <div><b>Rata-rata sisa uang:</b> <b style="color:#06FFA5">Rp {mean_sisa:,.0f}</b></div>
+                    <div><b>Risiko defisit:</b> <b style="color:#FF006E">{risk_sisa_negatif:.1f}%</b></div>
+                    <div><b>Selang kepercayaan 90%:</b> <b style="color:#3A86FF">Rp {p5_sisa:,.0f}</b> — <b style="color:#3A86FF">Rp {p95_sisa:,.0f}</b></div>
                     <div style="margin-top: 12px; color: #B8A8D8; font-size: 0.9rem;">
-                        💡 <i>area merah di chart = skenario di mana kamu bakal broke sebelum akhir bulan. 
-                        area hijau = kamu aman bestie!</i>
+                        <i>Area merah pada grafik menunjukkan skenario di mana pengeluaran melebihi pendapatan bulanan.
+                        Area di luar zona merah menunjukkan skenario surplus keuangan.</i>
                     </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
-# FOOTER 💖
+# FOOTER
 # ─────────────────────────────────────────────
 st.markdown("---")
 st.markdown(
@@ -1135,7 +1134,7 @@ st.markdown(
         <div style="color: #FFBE0B; font-size: 0.75rem; 
                     text-transform: uppercase; letter-spacing: 0.2em; 
                     margin-bottom: 8px; font-weight: 500;">
-            ✨ slay your finances ✨
+            Analisis Keuangan Mahasiswa
         </div>
         <div style="background: linear-gradient(135deg, #FF006E, #8338EC, #3A86FF);
                     -webkit-background-clip: text;
@@ -1144,10 +1143,10 @@ st.markdown(
                     font-family: 'Bricolage Grotesque', sans-serif;
                     font-size: 1.1rem;
                     font-weight: 700;">
-            💖 Gen Z Finance Hub · Sains Data · 2026 💖
+            Dashboard Analisis Keuangan · Sains Data · 2026
         </div>
         <div style="color: #B8A8D8; font-size: 0.8rem; margin-top: 8px;">
-            made with 💕, ✨ vibes, and a lot of statistical tea ☕
+            Dibuat untuk keperluan studi statistika dan analisis data
         </div>
     </div>
     """,

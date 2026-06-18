@@ -414,22 +414,20 @@ hr {
 </style>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
-# FIX KEYBOARD DOUBLE BUG (tanpa merusak sidebar)
+# ────────────────────────────────────────────
+# FIX KEYBOARD DOUBLE BUG - SAFE VERSION
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
-/* Hanya sembunyikan teks keyboard_double, bukan seluruh sidebar */
-span:contains("keyboard_double"),
-[class*="keyboard_double"],
-[data-testid="stSidebar"] > div > div:first-child > span:first-child {
+/* Target spesifik untuk keyboard_double tanpa mempengaruhi sidebar */
+div[data-testid="stSidebar"] h1:first-of-type,
+div[data-testid="stSidebar"] > div > div > div > span {
     display: none !important;
 }
 
-/* Pastikan sidebar tetap visible */
-[data-testid="stSidebar"] {
-    display: block !important;
-    visibility: visible !important;
+/* Force sidebar to show */
+section[data-testid="stSidebar"] {
+    display: flex !important;
 }
 </style>
 """, unsafe_allow_html=True)

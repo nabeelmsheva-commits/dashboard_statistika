@@ -15,25 +15,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-# ─────────────────────────────────────────────
-# FIX: PAKSA SIDEBAR MUNCUL
-# ─────────────────────────────────────────────
-st.markdown("""
-<style>
-/* Pastikan sidebar selalu terlihat */
-[data-testid="stSidebar"] {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-/* Sembunyikan hanya teks keyboard_double */
-body > div:first-child > div:first-child > div:first-child > span:first-child,
-div[data-testid="stSidebar"] > div:first-child > div:first-child > span:first-child {
-    display: none !important;
-}
-</style>
-""", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
 # CUSTOM CSS - CYBER THEME

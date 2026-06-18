@@ -415,31 +415,21 @@ hr {
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
-# FIX KEYBOARD DOUBLE BUG
+# FIX KEYBOARD DOUBLE BUG (tanpa merusak sidebar)
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
-span[class*="keyboard"],
-div[class*="keyboard"],
-.keyboard_double {
+/* Hanya sembunyikan teks keyboard_double, bukan seluruh sidebar */
+span:contains("keyboard_double"),
+[class*="keyboard_double"],
+[data-testid="stSidebar"] > div > div:first-child > span:first-child {
     display: none !important;
-}
-</style>
-""", unsafe_allow_html=True)# Tambahkan ini di dalam st.markdown() CSS yang sudah ada
-st.markdown("""
-<style>
-/* Hide keyboard_double text bug */
-span[class*="keyboard"],
-div[class*="keyboard"],
-.keyboard_double,
-[data-testid="stSidebar"] span:first-child {
-    display: none !important;
-    visibility: hidden !important;
 }
 
-/* Alternative fix - hide any stray text nodes in header */
-.main .block-container > div:first-child > span:not([class]) {
-    display: none !important;
+/* Pastikan sidebar tetap visible */
+[data-testid="stSidebar"] {
+    display: block !important;
+    visibility: visible !important;
 }
 </style>
 """, unsafe_allow_html=True)
